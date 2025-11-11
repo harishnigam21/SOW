@@ -1,18 +1,40 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "backend": "nodemon server.js",
+    "start": "node server.js",
+    "build": "prisma generate && <your-framework-build-or-start-command>",
+    "postinstall": "prisma generate"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.13.0",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^17.2.3",
+    "crypto": "^1.0.1",
+    "date-fns": "^4.1.0",
+    "date-fns-tz": "^3.2.0",
+    "dotenv": "^16.4.7",
+    "effect": "3.14.14",
+    "http": "^0.0.1-security",
+    "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
+    "path": "^0.12.7",
+    "prisma": "^6.13.0",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
     "express": "^5.1.0",
-    "install": "^0.13.0",
-    "npm": "^11.6.2"
-  }
+    "nodemon": "^3.1.9"
+  },
+  "overrides": {
+    "effect": "3.14.14"
+  },
+  "keywords": [],
+  "description": ""
 }

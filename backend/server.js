@@ -5,7 +5,7 @@ const corsOptions = require("./config/cors");
 const cookieParser = require("cookie-parser");
 const credentials = require("./middlewares/credentials");
 require("dotenv").config();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 
 //middleware
 app.use(credentials);
@@ -14,13 +14,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors(corsOptions));
 
-//app
-
-
 app.get("/", (req, res) => {
-  res.send("Welcome to SOW Backend Server");
+  res.send("Welcome to Backend Server");
 });
 
 app.listen(PORT, () => {
-  console.log(`Your SOW backend is running on PORT no : ${PORT}`);
+  console.log(`Your backend is running on PORT no : ${PORT}`);
 });
