@@ -1,4 +1,6 @@
 import logo from "../assets/images/diamond.png";
+import swflag from "../assets/images/flags/sw.png";
+import enflag from "../assets/images/flags/en.png";
 const navlist = [
   {
     id: 0,
@@ -27,6 +29,10 @@ const navlist = [
     id: 6,
     name: "Language",
     path: "language",
+    languages: [
+      { id: 0, name: "English", flag: enflag },
+      { id: 1, name: "Svenska", flag: swflag },
+    ],
   },
 ];
 export default navlist;

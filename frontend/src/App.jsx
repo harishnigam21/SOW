@@ -9,6 +9,7 @@ function App() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
+  const [switchLanguage, setSwitchLanguage] = useState("english");
   useEffect(() => {
     const handleReSize = () => {
       setScreen({
@@ -24,7 +25,11 @@ function App() {
   return (
     <main className="mainApp">
       <img src={bg} alt="main bg" />
-      <Header screen={screen} />
+      <Header
+        screen={screen}
+        switchLanguage={switchLanguage}
+        setSwitchLanguage={setSwitchLanguage}
+      />
       <LogIn />
       <Footer />
     </main>

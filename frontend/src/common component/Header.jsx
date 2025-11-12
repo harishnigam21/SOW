@@ -4,8 +4,9 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { ImCross } from "react-icons/im";
 import { useState } from "react";
 
-export default function Header({ screen }) {
+export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
   const [navToggle, setNavToggle] = useState(false);
+  const [lgToggle, setLGToggle] = useState(false);
   return (
     <header className="header noscrollbar">
       {screen.width > 850 ? (
@@ -48,7 +49,40 @@ export default function Header({ screen }) {
         </article>
       )}
       <section className="hesec3">
-        <Link to={navlist.slice(-1)[0].path}>{navlist.slice(-1)[0].name}</Link>
+        <article className="laguageSec">
+          {navlist
+            .slice(-1)[0]
+            .languages.filter(
+              (item) => item.name.toLowerCase() == switchLanguage.toLowerCase()
+            )
+            .map((item) => (
+              <div
+                key={`lsdefault`}
+                className="lsdefault"
+                onClick={() => setLGToggle(true)}
+              >
+                <h4>{item.name}</h4>
+                <img src={item.flag} alt="default language flag" />
+              </div>
+            ))}
+          {lgToggle && (
+            <article className="languageSwitcher">
+              {navlist.slice(-1)[0].languages.map((lang, index) => (
+                <div
+                  key={`lg/${index}`}
+                  className="lang"
+                  onClick={() => {
+                    setSwitchLanguage(lang.name);
+                    setLGToggle(false);
+                  }}
+                >
+                  <p>{lang.name}</p>
+                  <img src={lang.flag} alt="default language flag" />
+                </div>
+              ))}
+            </article>
+          )}
+        </article>
       </section>
     </header>
   );
