@@ -1,35 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import "./App.css";
+import Header from "./common component/Header";
+import Footer from "./common component/Footer";
+import LogIn from "./Component/LogIn";
+import bg from "./assets/images/homeBg.jpg";
+import { useEffect, useState } from "react";
 function App() {
-  const [count, setCount] = useState(0)
-
+  const [screen, setScreen] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  useEffect(() => {
+    const handleReSize = () => {
+      setScreen({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener("resize", handleReSize);
+    return () => {
+      window.removeEventListener("resize", handleReSize);
+    };
+  }, []);
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <main className="mainApp">
+      <img src={bg} alt="main bg" />
+      <Header screen={screen} />
+      <LogIn />
+      <Footer />
+    </main>
+  );
 }
 
-export default App
+export default App;
