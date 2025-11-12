@@ -12,12 +12,15 @@ export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
       {screen.width > 850 ? (
         <>
           <section className="hesec1">
-            <Link to={navlist[0].path}>
-              <img src={navlist[0].src} alt={navlist[0].name} />
+            <Link to={navlist[switchLanguage][0].path}>
+              <img
+                src={navlist[switchLanguage][0].src}
+                alt={navlist[switchLanguage][0].name}
+              />
             </Link>
           </section>
           <section className="hesec2">
-            {navlist.slice(1, -1).map((item, index) => (
+            {navlist[switchLanguage].slice(1, -1).map((item, index) => (
               <Link key={`navitem/${index}`} to={item.path}>
                 {item.name}
               </Link>
@@ -39,7 +42,7 @@ export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
           )}
           {navToggle && (
             <article className="naviconlist">
-              {navlist.slice(1, -1).map((item, index) => (
+              {navlist[switchLanguage].slice(1, -1).map((item, index) => (
                 <Link key={`navitem/${index}`} to={item.path}>
                   {item.name}
                 </Link>
@@ -50,7 +53,7 @@ export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
       )}
       <section className="hesec3">
         <article className="laguageSec">
-          {navlist
+          {navlist[switchLanguage]
             .slice(-1)[0]
             .languages.filter(
               (item) => item.name.toLowerCase() == switchLanguage.toLowerCase()
@@ -67,19 +70,21 @@ export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
             ))}
           {lgToggle && (
             <article className="languageSwitcher">
-              {navlist.slice(-1)[0].languages.map((lang, index) => (
-                <div
-                  key={`lg/${index}`}
-                  className="lang"
-                  onClick={() => {
-                    setSwitchLanguage(lang.name);
-                    setLGToggle(false);
-                  }}
-                >
-                  <p>{lang.name}</p>
-                  <img src={lang.flag} alt="default language flag" />
-                </div>
-              ))}
+              {navlist[switchLanguage]
+                .slice(-1)[0]
+                .languages.map((lang, index) => (
+                  <div
+                    key={`lg/${index}`}
+                    className="lang"
+                    onClick={() => {
+                      setSwitchLanguage(lang.name.toLowerCase());
+                      setLGToggle(false);
+                    }}
+                  >
+                    <p>{lang.name}</p>
+                    <img src={lang.flag} alt="default language flag" />
+                  </div>
+                ))}
             </article>
           )}
         </article>

@@ -30,8 +30,8 @@ function App() {
         switchLanguage={switchLanguage}
         setSwitchLanguage={setSwitchLanguage}
       />
-      <LogIn />
-      <Footer />
+      <LogIn switchLanguage={switchLanguage} />
+      <Footer switchLanguage={switchLanguage} />
     </main>
   );
 }

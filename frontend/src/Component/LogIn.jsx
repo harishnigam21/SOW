@@ -2,7 +2,34 @@ import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
-export default function LogIn() {
+export default function LogIn({ switchLanguage }) {
+  const loginPageContain = {
+    english: {
+      heading: "Log in",
+      email_label: "Enter your email address",
+      email_placeholder: "Email address",
+      email_error: "Invalid Email ID",
+      password_label: "Enter your password",
+      password_placeholder: "Password",
+      password_error: "Please enter password",
+      btn_label: "Log in",
+      register_label: "Register",
+      frgpwd_label: "Forgotten password ?",
+    },
+    svenska: {
+      heading: "Logga in",
+      email_label: "Ange din e-postadress",
+      email_placeholder: "E-postadress",
+      email_error: "Ogiltig e-postadress",
+      password_label: "Ange ditt lösenord",
+      password_placeholder: "Lösenord",
+      password_error: "Vänligen ange lösenord",
+      btn_label: "Logga in",
+      register_label: "Registrera dig",
+      frgpwd_label: "Glömt lösenord?",
+    },
+  };
+  const [contain, setContain] = useState(loginPageContain);
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const [passwordHidden, setPasswordHidden] = useState(true);
@@ -37,9 +64,9 @@ export default function LogIn() {
         errorRef.current.textContent = error.message;
       }
     } else if (user.password.length < 2) {
-      errorRef.current.textContent = "Please Enter Password";
+      errorRef.current.textContent = contain[switchLanguage].password_error;
     } else {
-      errorRef.current.textContent = "Invalid Email ID";
+      errorRef.current.textContent = contain[switchLanguage].email_error;
     }
     setTimeout(() => {
       errorRef.current.textContent = "";
@@ -56,14 +83,14 @@ export default function LogIn() {
   };
   return (
     <section className="login">
-      <h1>Log in</h1>
+      <h1>{contain[switchLanguage].heading}</h1>
       <article className="loginemail">
-        <label htmlFor="email">Enter your email address</label>
+        <label htmlFor="email">{contain[switchLanguage].email_label}</label>
         <input
           type="email"
           name="email"
           id="email"
-          placeholder="Email address"
+          placeholder={contain[switchLanguage].email_placeholder}
           onChange={(e) =>
             setUser((prev) => ({ ...prev, email: e.target.value }))
           }
@@ -71,13 +98,15 @@ export default function LogIn() {
         />
       </article>
       <article className="loginpassword">
-        <label htmlFor="password">Enter your password</label>
+        <label htmlFor="password">
+          {contain[switchLanguage].password_label}
+        </label>
         <div className="passworddiv">
           <input
             type={passwordHidden ? "password" : "text"}
             name="password"
             id="password"
-            placeholder="Password"
+            placeholder={contain[switchLanguage].password_placeholder}
             onChange={(e) =>
               setUser((prev) => ({ ...prev, password: e.target.value }))
             }
@@ -99,12 +128,12 @@ export default function LogIn() {
       </article>
       <strong ref={errorRef} className="error"></strong>
       <button className="loginbutton flex" onClick={handleSubmit}>
-        <span>Log in</span>
+        <span>{contain[switchLanguage].btn_label}</span>
         <span ref={loaderRef} className="loader"></span>
       </button>
       <article className="loginextras">
-        <Link to={"/register"}>Register</Link>
-        <Link to={"/frgpwd"}>Forgotten password?</Link>
+        <Link to={"/register"}>{contain[switchLanguage].register_label}</Link>
+        <Link to={"/frgpwd"}>{contain[switchLanguage].frgpwd_label}</Link>
       </article>
     </section>
   );
