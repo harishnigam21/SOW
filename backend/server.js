@@ -17,9 +17,6 @@ app.use(cors(corsOptions));
 
 //requests
 app.use("/", require("./routes/Auth"));
-
-app.use(jwtVerifier);
-
 app.use("/", require("./routes/Verify"));
 
 app.get("/", (req, res) => {
