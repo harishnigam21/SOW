@@ -5,7 +5,6 @@ const corsOptions = require("./config/cors");
 const cookieParser = require("cookie-parser");
 const credentials = require("./middlewares/credentials");
 require("dotenv").config();
-const jwtVerifier = require("./middlewares/jwtVerifier");
 const PORT = process.env.PORT || 8080;
 
 //middleware
