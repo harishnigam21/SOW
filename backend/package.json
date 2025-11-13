@@ -30,7 +30,8 @@
   },
   "devDependencies": {
     "express": "^5.1.0",
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.9",
+    "react-scripts": "^5.0.1"
   },
   "overrides": {
     "effect": "3.14.14"
