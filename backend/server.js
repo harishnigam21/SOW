@@ -5,6 +5,7 @@ const corsOptions = require("./config/cors");
 const cookieParser = require("cookie-parser");
 const credentials = require("./middlewares/credentials");
 require("dotenv").config();
+const jwtVerifier = require("./middlewares/jwtVerifier");
 const PORT = process.env.PORT || 8080;
 
 //middleware
@@ -13,6 +14,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors(corsOptions));
+
+//requests
+app.use("/", require("./routes/Auth"));
+
+app.use(jwtVerifier);
+
+app.use("/", require("./routes/Verify"));
 
 app.get("/", (req, res) => {
   res.send("Welcome to Backend Server");
