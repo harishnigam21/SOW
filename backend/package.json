@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "backend": "nodemon server.js",
     "start": "node server.js",
-    "build": "prisma generate && <your-framework-build-or-start-command>",
+    "build": "prisma generate && react-scripts build",
     "postinstall": "prisma generate"
   },
   "author": "",
