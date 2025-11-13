@@ -10,7 +10,7 @@ datasource db {
 }
 
 model Users {
-  id              Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  id              Int     @id @unique(map: "user_id_UNIQUE") @default(autoincrement())
   first_name      String  @db.VarChar(128)
   middle_name     String? @db.VarChar(128)
   last_name       String  @db.VarChar(128)
@@ -19,4 +19,14 @@ model Users {
   email           String  @unique(map: "email_UNIQUE") @db.VarChar(128)
   password        String  @db.VarChar(512)
   reference_token String  @unique(map: "reference_token_UNIQUE") @db.VarChar(512)
+}
+
+model Services {
+  id          Int    @id @unique(map: "service_id_UNIQUE") @default(autoincrement())
+  service     String @db.VarChar(256)
+  inPrice     Int
+  price       Int
+  unit        String @db.VarChar(128)
+  inStock     Int
+  description String @db.VarChar(512)
 }

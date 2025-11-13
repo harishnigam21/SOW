@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
@@ -189,10 +190,77 @@ export default function PriceList({ screen }) {
       description: `A collection of essential tools for any online store. Includes plugins for advanced inventory management, detailed analytics, automated email marketing, and checkout optimization.`,
     },
   ];
-  const [priceList, setPriceList] = useState(data);
+  const [priceList, setPriceList] = useState([]);
+  const [updateList, setUpdateList] = useState([]);
   const [update, setUpdate] = useState(false);
   const [initialMount, setInitialMount] = useState(true);
+  const loaderRef = useRef(null);
+  const btnloaderRef = useRef(null);
+  const errorRef = useRef(null);
+  const makeUpdate = (id, key, value) => {
+    const newRecord = {
+      id: id,
+      [key]: value,
+    };
 
+    setUpdateList((prev) => {
+      let found = false;
+      const nextList = prev.map((inthere) => {
+        if (inthere.id === id) {
+          found = true;
+          return {
+            ...inthere,
+            [key]: value,
+          };
+        }
+        return inthere;
+      });
+      if (!found) {
+        return [...nextList, newRecord];
+      }
+      return nextList;
+    });
+  };
+  useEffect(() => {
+    loaderRef.current.style.display = "flex";
+    const getDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/getRecords`;
+    const getData = async () => {
+      try {
+        const response = await fetch(getDataUrl, {
+          method: "GET",
+          headers: {
+            authorization: `Bearer ${JSON.parse(
+              window.sessionStorage.getItem("accTk")
+            )}`,
+            "content-type": "application/json",
+          },
+          credentials: "include",
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          errorRef.current.textContent = data.message;
+          loaderRef.current.style.display = "none";
+          return;
+        }
+        if (data.records.length == 0) {
+          errorRef.current.textContent = "No Product/Service Found !";
+        }
+
+        setTimeout(() => {
+          setPriceList(data.records);
+          setInitialMount(true);
+          setUpdate(false);
+          loaderRef.current.style.display = "none";
+        }, 2000);
+      } catch (error) {
+        console.log(error.message);
+        errorRef.current.textContent = error.message;
+        loaderRef.current.style.display = "none";
+        return;
+      }
+    };
+    getData();
+  }, []);
   useEffect(() => {
     if (initialMount) {
       setInitialMount(false);
@@ -200,6 +268,42 @@ export default function PriceList({ screen }) {
       setUpdate(true);
     }
   }, [priceList]);
+
+  const handleUpdate = () => {
+    btnloaderRef.current.style.display = "flex";
+    const updateDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/updateRecords`;
+    const updateData = async () => {
+      try {
+        const response = await fetch(updateDataUrl, {
+          method: "PUT",
+          headers: {
+            authorization: `Bearer ${JSON.parse(
+              window.sessionStorage.getItem("accTk")
+            )}`,
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ updateData: updateList }),
+          credentials: "include",
+        });
+        const data = await response.json();
+        if (!response.ok) {
+          alert(data.message);
+          loaderRef.current.style.display = "none";
+          return;
+        }
+
+        setInitialMount(true);
+        setUpdate(false);
+        btnloaderRef.current.style.display = "none";
+        alert(data.message);
+      } catch (error) {
+        alert(error.message);
+        loaderRef.current.style.display = "none";
+        return;
+      }
+    };
+    updateData();
+  };
 
   return (
     <section className="PriceList">
@@ -242,326 +346,397 @@ export default function PriceList({ screen }) {
           </div>
         </article>
       </article>
-      {screen.width > 1080 ? (
-        <table className="pageData">
-          <thead>
-            <tr className="pageDataHead">
-              <td>Article No.</td>
-              <td>Product/service</td>
-              <td>In Price</td>
-              <td>Price</td>
-              <td>Unit</td>
-              <td>In Stock</td>
-              <td>Description</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody className="pageDataBody">
-            {priceList.map((item, index) => (
-              <tr key={`product/${index}`}>
-                <td>{item.id + 1}</td>
-                <td>
-                  <input
-                    type="text"
-                    name="service"
-                    id="service"
-                    value={item.service}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return { ...inthere, service: e.target.value };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="inprice"
-                    id="inprice"
-                    value={item.inPrice}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return {
-                              ...inthere,
-                              inPrice: parseInt(e.target.value),
-                            };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    value={item.price}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return {
-                              ...inthere,
-                              price: parseInt(e.target.value),
-                            };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="unit"
-                    id="unit"
-                    value={item.unit}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return { ...inthere, unit: e.target.value };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="instock"
-                    id="instock"
-                    value={item.inStock}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return {
-                              ...inthere,
-                              inStock: parseInt(e.target.value),
-                            };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="description"
-                    id="description"
-                    value={item.description}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return { ...inthere, description: e.target.value };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <BsThreeDots className="icon" />
-                </td>
+      {priceList && priceList.length > 0 ? (
+        screen.width > 1080 ? (
+          <table className="pageData">
+            <thead>
+              <tr className="pageDataHead">
+                <td>Article No.</td>
+                <td>Product/service</td>
+                <td>In Price</td>
+                <td>Price</td>
+                <td>Unit</td>
+                <td>In Stock</td>
+                <td>Description</td>
+                <td></td>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : screen.width > 720 ? (
-        <table className="pageData">
-          <thead>
-            <tr className="pageDataHead">
-              <td>Article No.</td>
-              <td>Product/service</td>
-              <td>Price</td>
-              <td>In Stock</td>
-              <td>Unit</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody className="pageDataBody">
-            {priceList.map((item, index) => (
-              <tr key={`product/${index}`}>
-                <td>{item.id + 1}</td>
-                <td>
-                  <input
-                    type="text"
-                    name="service"
-                    id="service"
-                    value={item.service}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return { ...inthere, service: e.target.value };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    value={item.price}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return {
-                              ...inthere,
-                              price: parseInt(e.target.value),
-                            };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="instock"
-                    id="instock"
-                    value={item.inStock}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return {
-                              ...inthere,
-                              inStock: parseInt(e.target.value),
-                            };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    name="unit"
-                    id="unit"
-                    value={item.unit}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return { ...inthere, unit: e.target.value };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <BsThreeDots className="icon" />
-                </td>
+            </thead>
+            <tbody className="pageDataBody">
+              {priceList.map((item, index) => (
+                <tr key={`product/${index}`}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <input
+                      type="text"
+                      name="service"
+                      id="service"
+                      value={item.service}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(inthere.id, "service", e.target.value);
+                              return { ...inthere, service: e.target.value };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="inprice"
+                      id="inprice"
+                      value={item.inPrice}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(
+                                inthere.id,
+                                "inPrice",
+                                parseInt(e.target.value)
+                              );
+                              return {
+                                ...inthere,
+                                inPrice: parseInt(e.target.value),
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="price"
+                      id="price"
+                      value={item.price}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(
+                                inthere.id,
+                                "price",
+                                parseInt(e.target.value)
+                              );
+                              return {
+                                ...inthere,
+                                price: parseInt(e.target.value),
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="unit"
+                      id="unit"
+                      value={item.unit}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(inthere.id, "unit", e.target.value);
+                              return { ...inthere, unit: e.target.value };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="instock"
+                      id="instock"
+                      value={item.inStock}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(
+                                inthere.id,
+                                "inStock",
+                                parseInt(e.target.value)
+                              );
+                              return {
+                                ...inthere,
+                                inStock: parseInt(e.target.value),
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="description"
+                      id="description"
+                      value={item.description}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(
+                                inthere.id,
+                                "description",
+                                e.target.value
+                              );
+                              return {
+                                ...inthere,
+                                description: e.target.value,
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <BsThreeDots className="icon" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : screen.width > 720 ? (
+          <table className="pageData">
+            <thead>
+              <tr className="pageDataHead">
+                <td>Article No.</td>
+                <td>Product/service</td>
+                <td>Price</td>
+                <td>In Stock</td>
+                <td>Unit</td>
+                <td></td>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="pageDataBody">
+              {priceList.map((item, index) => (
+                <tr key={`product/${index}`}>
+                  <td>{index + 1}</td>
+                  <td>
+                    <input
+                      type="text"
+                      name="service"
+                      id="service"
+                      value={item.service}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(inthere.id, "service", e.target.value);
+                              return { ...inthere, service: e.target.value };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="price"
+                      id="price"
+                      value={item.price}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(
+                                inthere.id,
+                                "price",
+                                parseInt(e.target.value)
+                              );
+                              return {
+                                ...inthere,
+                                price: parseInt(e.target.value),
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="instock"
+                      id="instock"
+                      value={item.inStock}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(
+                                inthere.id,
+                                "inStock",
+                                parseInt(e.target.value)
+                              );
+                              return {
+                                ...inthere,
+                                inStock: parseInt(e.target.value),
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="unit"
+                      id="unit"
+                      value={item.unit}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(inthere.id, "unit", e.target.value);
+                              return { ...inthere, unit: e.target.value };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <BsThreeDots className="icon" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <table className="pageData">
+            <thead>
+              <tr className="pageDataHead">
+                <td>Product/service</td>
+                <td>Price</td>
+                <td></td>
+              </tr>
+            </thead>
+            <tbody className="pageDataBody">
+              {priceList.map((item, index) => (
+                <tr key={`product/${index}`}>
+                  <td>
+                    <input
+                      type="text"
+                      name="service"
+                      id="service"
+                      value={item.service}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(inthere.id, "service", e.target.value);
+                              return { ...inthere, service: e.target.value };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="number"
+                      name="price"
+                      id="price"
+                      value={item.price}
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              makeUpdate(
+                                inthere.id,
+                                "price",
+                                parseInt(e.target.value)
+                              );
+                              return {
+                                ...inthere,
+                                price: parseInt(e.target.value),
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
+                  <td>
+                    <BsThreeDots className="icon" />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )
       ) : (
-        <table className="pageData">
-          <thead>
-            <tr className="pageDataHead">
-              <td>Product/service</td>
-              <td>Price</td>
-              <td></td>
-            </tr>
-          </thead>
-          <tbody className="pageDataBody">
-            {priceList.map((item, index) => (
-              <tr key={`product/${index}`}>
-                <td>
-                  <input
-                    type="text"
-                    name="service"
-                    id="service"
-                    value={item.service}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return { ...inthere, service: e.target.value };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    name="price"
-                    id="price"
-                    value={item.price}
-                    onChange={(e) =>
-                      setPriceList((prev) =>
-                        prev.map((inthere) => {
-                          if (item.id == inthere.id) {
-                            return {
-                              ...inthere,
-                              price: parseInt(e.target.value),
-                            };
-                          } else {
-                            return inthere;
-                          }
-                        })
-                      )
-                    }
-                  />
-                </td>
-                <td>
-                  <BsThreeDots className="icon" />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <strong
+          ref={errorRef}
+          style={{ textAlign: "center", color: "red" }}
+        ></strong>
       )}
+
       {update && (
         <article className="updatePopup">
           <strong>Push Updates to DB</strong>
-          <button>Update</button>
+          <button
+            style={{
+              display: "flex",
+              position: "relative",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            onClick={handleUpdate}
+          >
+            <strong>Update</strong>
+            <strong
+              ref={btnloaderRef}
+              style={{ position: "absolute", right: "0" }}
+              className="loader"
+            ></strong>
+          </button>
         </article>
       )}
+      <strong
+        ref={loaderRef}
+        style={{ width: "50px", height: "50px", position: "relative" }}
+        className="loader"
+      ></strong>
     </section>
   );
 }

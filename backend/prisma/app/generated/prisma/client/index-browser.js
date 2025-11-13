@@ -133,6 +133,16 @@ exports.Prisma.UsersScalarFieldEnum = {
   reference_token: 'reference_token'
 };
 
+exports.Prisma.ServicesScalarFieldEnum = {
+  id: 'id',
+  service: 'service',
+  inPrice: 'inPrice',
+  price: 'price',
+  unit: 'unit',
+  inStock: 'inStock',
+  description: 'description'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -150,7 +160,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Users: 'Users'
+  Users: 'Users',
+  Services: 'Services'
 };
 
 /**

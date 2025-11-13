@@ -105,6 +105,16 @@ exports.Prisma.UsersScalarFieldEnum = {
   reference_token: 'reference_token'
 };
 
+exports.Prisma.ServicesScalarFieldEnum = {
+  id: 'id',
+  service: 'service',
+  inPrice: 'inPrice',
+  price: 'price',
+  unit: 'unit',
+  inStock: 'inStock',
+  description: 'description'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -122,7 +132,8 @@ exports.Prisma.NullsOrder = {
 
 
 exports.Prisma.ModelName = {
-  Users: 'Users'
+  Users: 'Users',
+  Services: 'Services'
 };
 /**
  * Create the Client
@@ -176,13 +187,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../prisma/app/generated/prisma/client\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Users {\n  id              Int     @id @unique(map: \"id_UNIQUE\") @default(autoincrement())\n  first_name      String  @db.VarChar(128)\n  middle_name     String? @db.VarChar(128)\n  last_name       String  @db.VarChar(128)\n  gender          String  @db.VarChar(45)\n  mobile_no       String  @unique(map: \"mobile_no_UNIQUE\") @db.VarChar(20)\n  email           String  @unique(map: \"email_UNIQUE\") @db.VarChar(128)\n  password        String  @db.VarChar(512)\n  reference_token String  @unique(map: \"reference_token_UNIQUE\") @db.VarChar(512)\n}\n",
-  "inlineSchemaHash": "255558fd76c5664f990b064ad9abc690a71db9c1b3df089f0670f263eee8bdfd",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../prisma/app/generated/prisma/client\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Users {\n  id              Int     @id @unique(map: \"user_id_UNIQUE\") @default(autoincrement())\n  first_name      String  @db.VarChar(128)\n  middle_name     String? @db.VarChar(128)\n  last_name       String  @db.VarChar(128)\n  gender          String  @db.VarChar(45)\n  mobile_no       String  @unique(map: \"mobile_no_UNIQUE\") @db.VarChar(20)\n  email           String  @unique(map: \"email_UNIQUE\") @db.VarChar(128)\n  password        String  @db.VarChar(512)\n  reference_token String  @unique(map: \"reference_token_UNIQUE\") @db.VarChar(512)\n}\n\nmodel Services {\n  id          Int    @id @unique(map: \"service_id_UNIQUE\") @default(autoincrement())\n  service     String @db.VarChar(256)\n  inPrice     Int\n  price       Int\n  unit        String @db.VarChar(128)\n  inStock     Int\n  description String @db.VarChar(512)\n}\n",
+  "inlineSchemaHash": "3020ee808721c49f24be0acee0e832ab6e5ee2d9a86854d922e56b7108724e2b",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"middle_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile_no\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reference_token\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"middle_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile_no\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reference_token\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Services\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"service\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"inPrice\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"unit\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"inStock\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
