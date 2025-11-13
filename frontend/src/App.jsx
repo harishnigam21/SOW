@@ -4,24 +4,9 @@ import Footer from "./common component/Footer";
 import LogIn from "./Component/LogIn";
 import bg from "./assets/images/homeBg.jpg";
 import { useEffect, useState } from "react";
-function App() {
-  const [screen, setScreen] = useState({
-    width: window.innerWidth,
-    height: window.innerHeight,
-  });
+function App({screen}) {
   const [switchLanguage, setSwitchLanguage] = useState("english");
-  useEffect(() => {
-    const handleReSize = () => {
-      setScreen({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    };
-    window.addEventListener("resize", handleReSize);
-    return () => {
-      window.removeEventListener("resize", handleReSize);
-    };
-  }, []);
+ 
   return (
     <main className="mainApp">
       <img src={bg} alt="main bg" />

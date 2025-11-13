@@ -75,6 +75,7 @@ article {
   gap: 1rem;
   box-sizing: border-box;
   padding: 0 1rem;
+  color: white;
 }
 .fooup {
   display: flex;
@@ -229,9 +230,180 @@ a {
     color: blue;
   }
 }
-@media screen and (min-width: 1080px) {
-  .login {
-    width: 33%;
+
+.inHome {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: 100vh;
+}
+.inHomeLeft {
+  width: fit-content;
+  white-space: nowrap;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  a {
+    font-weight: lighter;
+  }
+  > strong {
+    font-size: 28px;
+    text-align: center;
+    border-bottom: 1px solid blue;
+  }
+  box-shadow: 1px 0px 10px black;
+}
+.inHomeRight {
+  width: 100%;
+  overflow: hidden;
+}
+.menuListItem {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: start;
+  align-items: center;
+  .icon {
+    font-size: 24px;
+  }
+}
+.PriceList {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+.PriceListUp {
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.searchArea {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.searchArticle,
+.searchProduct {
+  display: flex;
+  position: relative;
+  align-items: center;
+  width: 100%;
+  input {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 2rem;
+    border: 1px solid rgb(234, 224, 224);
+    background-color: white;
+    font-size: medium;
+  }
+  .icon {
+    position: absolute;
+    color: rgb(0, 183, 255);
+    right: 5px;
+  }
+}
+.btnset {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.btnset1,
+.btnset2,
+.btnset3 {
+  border: 1px solid rgb(234, 224, 224);
+  box-shadow: 0.1px 0.1px 10px 1px rgb(234, 224, 224);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 3rem;
+  border-radius: 2rem;
+  white-space: nowrap;
+  gap: 1rem;
+  span {
+    display: none;
+  }
+  .icon {
+    font-size: 32px;
+  }
+}
+.pageData {
+  padding: 1rem;
+  width: 100%;
+  gap: 1rem;
+  border-spacing: 1rem;
+  font-size: medium;
+  overflow: hidden;
+}
+.pageDataHead {
+  white-space: nowrap;
+  td,
+  input {
+    font-weight: bold;
+    font-size: large;
+  }
+}
+.pageDataBody {
+  tr td input {
+    width: 100%;
+    border: none;
+    border-radius: 1rem;
+    border: 1px solid rgb(234, 224, 224);
+    padding:0.5rem 1rem;
+  }
+  .icon{
+    font-size: 16px;
+    color: rgb(0, 183, 255);
+  }
+}
+.updatePopup{
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  bottom: 0;
+  left:0;
+  width: 100%;
+  padding: 1rem;
+  background-color: rgb(0, 183, 255);
+  color: white;
+  animation: fadeOut 0.5s ease-in forwards;
+
+  button{
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    color: black;
+    font-size: 16px;
+    border: none;
+  }
+}
+
+
+.DirectThem{
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  justify-content: center;
+  gap: 0.3rem;
+  a{
+    color: blue;
+  }
+}
+@media screen and (min-width: 480px) {
+  .btnset {
+    display: flex;
+    justify-content: space-between;
   }
 }
 @media screen and (min-width: 680px) {
@@ -256,13 +428,42 @@ a {
     justify-content: space-around;
     padding: 1rem;
   }
+  .PriceListUp {
+    flex-direction: row;
+  }
+  .searchArea {
+    width: 75%;
+  }
+  .btnset {
+    align-items: start;
+    justify-content: flex-end;
+    gap: 4rem;
+  }
 }
 @media screen and (min-width: 1080px) {
   .login {
     width: 33%;
   }
+  .btnset {
+    gap: unset;
+    padding: unset;
+    gap: 1rem;
+  }
+  .btnset1,
+  .btnset2,
+  .btnset3 {
+    padding: unset;
+    padding: 0.5rem;
+    span {
+      display: flex;
+    }
+  }
 }
 .noscrollbar::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+td::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
@@ -291,7 +492,11 @@ a {
   color: red;
   font-size: 24px !important;
 }
-
+button {
+  cursor: pointer;
+  color: white;
+  font-size: large;
+}
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
