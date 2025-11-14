@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
@@ -192,10 +191,7 @@ export default function PriceList({ screen }) {
   ];
   const [priceList, setPriceList] = useState([]);
   const [updateList, setUpdateList] = useState([]);
-  const [update, setUpdate] = useState(false);
-  const [initialMount, setInitialMount] = useState(true);
   const loaderRef = useRef(null);
-  const btnloaderRef = useRef(null);
   const errorRef = useRef(null);
   const makeUpdate = (id, key, value) => {
     const newRecord = {
@@ -248,8 +244,6 @@ export default function PriceList({ screen }) {
 
         setTimeout(() => {
           setPriceList(data.records);
-          setInitialMount(true);
-          setUpdate(false);
           loaderRef.current.style.display = "none";
         }, 2000);
       } catch (error) {
@@ -261,16 +255,8 @@ export default function PriceList({ screen }) {
     };
     getData();
   }, []);
-  useEffect(() => {
-    if (initialMount) {
-      setInitialMount(false);
-    } else {
-      setUpdate(true);
-    }
-  }, [priceList]);
 
   const handleUpdate = () => {
-    btnloaderRef.current.style.display = "flex";
     const updateDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/updateRecords`;
     const updateData = async () => {
       try {
@@ -288,17 +274,10 @@ export default function PriceList({ screen }) {
         const data = await response.json();
         if (!response.ok) {
           alert(data.message);
-          loaderRef.current.style.display = "none";
           return;
         }
-
-        setInitialMount(true);
-        setUpdate(false);
-        btnloaderRef.current.style.display = "none";
-        alert(data.message);
       } catch (error) {
         alert(error.message);
-        loaderRef.current.style.display = "none";
         return;
       }
     };
@@ -368,9 +347,10 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="text"
-                      name="service"
-                      id="service"
+                      name="lgservice"
+                      id={`service/${index}`}
                       value={item.service}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -389,8 +369,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="number"
                       name="inprice"
-                      id="inprice"
+                      id={`price/${index}`}
                       value={item.inPrice}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -416,8 +397,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="number"
                       name="price"
-                      id="price"
+                      id={`price/${index}`}
                       value={item.price}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -443,8 +425,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="text"
                       name="unit"
-                      id="unit"
+                      id={`unit/${index}`}
                       value={item.unit}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -463,8 +446,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="number"
                       name="instock"
-                      id="instock"
+                      id={`instock/${index}`}
                       value={item.inStock}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -490,8 +474,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="text"
                       name="description"
-                      id="description"
+                      id={`description/${index}`}
                       value={item.description}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -540,8 +525,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="text"
                       name="service"
-                      id="service"
+                      id={`service/${index}`}
                       value={item.service}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -560,8 +546,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="number"
                       name="price"
-                      id="price"
+                      id={`price/${index}`}
                       value={item.price}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -587,8 +574,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="number"
                       name="instock"
-                      id="instock"
+                      id={`instock/${index}`}
                       value={item.inStock}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -614,8 +602,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="text"
                       name="unit"
-                      id="unit"
+                      id={`unit/${index}`}
                       value={item.unit}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -653,8 +642,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="text"
                       name="service"
-                      id="service"
+                      id={`service/${index}`}
                       value={item.service}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -673,8 +663,9 @@ export default function PriceList({ screen }) {
                     <input
                       type="number"
                       name="price"
-                      id="price"
+                      id={`price/${index}`}
                       value={item.price}
+                      onBlur={handleUpdate}
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
@@ -709,28 +700,6 @@ export default function PriceList({ screen }) {
           ref={errorRef}
           style={{ textAlign: "center", color: "red" }}
         ></strong>
-      )}
-
-      {update && (
-        <article className="updatePopup">
-          <strong>Push Updates to DB</strong>
-          <button
-            style={{
-              display: "flex",
-              position: "relative",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onClick={handleUpdate}
-          >
-            <strong>Update</strong>
-            <strong
-              ref={btnloaderRef}
-              style={{ position: "absolute", right: "0" }}
-              className="loader"
-            ></strong>
-          </button>
-        </article>
       )}
       <strong
         ref={loaderRef}

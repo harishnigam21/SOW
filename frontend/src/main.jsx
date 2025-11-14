@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { StrictMode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -166,23 +166,23 @@ Ha en trevlig dag!`,
       window.removeEventListener("resize", handleReSize);
     };
   }, []);
-  useEffect(() => {
-    const containUrl = `${import.meta.env.VITE_BACKEND_HOST}/get_contain`;
-    const getContain = async () => {
-      const response = await fetch(containUrl, {
-        method: "GET",
-        headers: { "content-type": "application/json" },
-        credentials: "include",
-      });
-      const data = await response.json();
-      if (!response.ok) {
-        alert(data.message);
-      }
-      console.log(data.data);
-      alert(data.message);
-    };
-    getContain();
-  }, []);
+  // useEffect(() => {
+  //   const containUrl = `${import.meta.env.VITE_BACKEND_HOST}/get_contain`;
+  //   const getContain = async () => {
+  //     const response = await fetch(containUrl, {
+  //       method: "GET",
+  //       headers: { "content-type": "application/json" },
+  //       credentials: "include",
+  //     });
+  //     const data = await response.json();
+  //     if (!response.ok) {
+  //       alert(data.message);
+  //     }
+  //     console.log(data.data);
+  //     alert(data.message);
+  //   };
+  //   getContain();
+  // }, []);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -238,8 +238,4 @@ Ha en trevlig dag!`,
   return <RouterProvider router={router} />;
 };
 
-createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <RootProvider />
-  </StrictMode>
-);
+createRoot(document.getElementById("root")).render(<RootProvider />);

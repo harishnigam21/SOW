@@ -30,6 +30,7 @@ const updateRecord = async (req, res) => {
       console.log("Failed to update data");
       return res.status(503).json({ message: "Failed to update data" });
     }
+    console.log('"Successfully Updated Data"');
     return res.status(200).json({ message: "Successfully Updated Data" });
   } catch (error) {
     console.log(error);
