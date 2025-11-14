@@ -18,6 +18,7 @@ app.use(cors(corsOptions));
 app.use("/", require("./routes/Auth"));
 app.use("/", require("./routes/Verify"));
 app.use("/", require("./routes/Service"));
+app.use("/", require("./routes/getContain"));
 
 app.get("/", (req, res) => {
   res.send("Welcome to Backend Server");

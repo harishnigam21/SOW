@@ -1,34 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
-export default function LogIn({ switchLanguage }) {
-  const loginPageContain = {
-    english: {
-      heading: "Log in",
-      email_label: "Enter your email address",
-      email_placeholder: "Email address",
-      email_error: "Invalid Email ID",
-      password_label: "Enter your password",
-      password_placeholder: "Password",
-      password_error: "Please enter password",
-      btn_label: "Log in",
-      register_label: "Register",
-      frgpwd_label: "Forgotten password ?",
-    },
-    svenska: {
-      heading: "Logga in",
-      email_label: "Ange din e-postadress",
-      email_placeholder: "E-postadress",
-      email_error: "Ogiltig e-postadress",
-      password_label: "Ange ditt lösenord",
-      password_placeholder: "Lösenord",
-      password_error: "Vänligen ange lösenord",
-      btn_label: "Logga in",
-      register_label: "Registrera dig",
-      frgpwd_label: "Glömt lösenord?",
-    },
-  };
+export default function LogIn({ switchLanguage, loginPageContain }) {
   const [contain, setContain] = useState(loginPageContain);
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();

@@ -30,3 +30,10 @@ model Services {
   inStock     Int
   description String @db.VarChar(512)
 }
+
+model Contain {
+  id               Int    @id @unique(map: "contain_id_UNIQUE") @default(autoincrement())
+  languages        String @db.Text
+  loginPageContain String @db.Text
+  terms            String @db.Text
+}

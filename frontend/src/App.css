@@ -230,6 +230,37 @@ a {
     color: blue;
   }
 }
+.terms {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  h1 {
+    color: white;
+    margin: 0;
+    font-size: 32px;
+  }
+  button {
+    background-color: #089e1e;
+    padding: 1rem 3rem;
+    border-radius: 2rem;
+    border: none;
+  }
+  article {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    max-height: 100vh;
+    overflow: scroll;
+    p {
+      margin: 0;
+    }
+  }
+}
 
 .inHome {
   display: flex;
@@ -359,28 +390,28 @@ a {
     border: none;
     border-radius: 1rem;
     border: 1px solid rgb(234, 224, 224);
-    padding:0.5rem 1rem;
+    padding: 0.5rem 1rem;
   }
-  .icon{
+  .icon {
     font-size: 16px;
     color: rgb(0, 183, 255);
   }
 }
-.updatePopup{
+.updatePopup {
   position: sticky;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   bottom: 0;
-  left:0;
+  left: 0;
   width: 100%;
   padding: 1rem;
   background-color: rgb(0, 183, 255);
   color: white;
   animation: fadeOut 0.5s ease-in forwards;
 
-  button{
+  button {
     padding: 0.5rem 1rem;
     border-radius: 1rem;
     color: black;
@@ -389,14 +420,13 @@ a {
   }
 }
 
-
-.DirectThem{
+.DirectThem {
   display: flex;
   width: 100%;
   padding: 1rem;
   justify-content: center;
   gap: 0.3rem;
-  a{
+  a {
     color: blue;
   }
 }
@@ -438,6 +468,11 @@ a {
     align-items: start;
     justify-content: flex-end;
     gap: 4rem;
+  }
+  .terms{
+    article{
+      max-width: 850px;
+    }
   }
 }
 @media screen and (min-width: 1080px) {

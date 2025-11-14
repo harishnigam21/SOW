@@ -23,6 +23,11 @@ export type Users = $Result.DefaultSelection<Prisma.$UsersPayload>
  * 
  */
 export type Services = $Result.DefaultSelection<Prisma.$ServicesPayload>
+/**
+ * Model Contain
+ * 
+ */
+export type Contain = $Result.DefaultSelection<Prisma.$ContainPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -161,6 +166,16 @@ export class PrismaClient<
     * ```
     */
   get services(): Prisma.ServicesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.contain`: Exposes CRUD operations for the **Contain** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Contains
+    * const contains = await prisma.contain.findMany()
+    * ```
+    */
+  get contain(): Prisma.ContainDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -603,7 +618,8 @@ export namespace Prisma {
 
   export const ModelName: {
     Users: 'Users',
-    Services: 'Services'
+    Services: 'Services',
+    Contain: 'Contain'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -622,7 +638,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "users" | "services"
+      modelProps: "users" | "services" | "contain"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -774,6 +790,80 @@ export namespace Prisma {
           }
         }
       }
+      Contain: {
+        payload: Prisma.$ContainPayload<ExtArgs>
+        fields: Prisma.ContainFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ContainFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ContainFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>
+          }
+          findFirst: {
+            args: Prisma.ContainFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ContainFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>
+          }
+          findMany: {
+            args: Prisma.ContainFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>[]
+          }
+          create: {
+            args: Prisma.ContainCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>
+          }
+          createMany: {
+            args: Prisma.ContainCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ContainCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>[]
+          }
+          delete: {
+            args: Prisma.ContainDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>
+          }
+          update: {
+            args: Prisma.ContainUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>
+          }
+          deleteMany: {
+            args: Prisma.ContainDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ContainUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ContainUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>[]
+          }
+          upsert: {
+            args: Prisma.ContainUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ContainPayload>
+          }
+          aggregate: {
+            args: Prisma.ContainAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateContain>
+          }
+          groupBy: {
+            args: Prisma.ContainGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ContainGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ContainCountArgs<ExtArgs>
+            result: $Utils.Optional<ContainCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -872,6 +962,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     users?: UsersOmit
     services?: ServicesOmit
+    contain?: ContainOmit
   }
 
   /* Types for Logging */
@@ -3101,6 +3192,1022 @@ export namespace Prisma {
 
 
   /**
+   * Model Contain
+   */
+
+  export type AggregateContain = {
+    _count: ContainCountAggregateOutputType | null
+    _avg: ContainAvgAggregateOutputType | null
+    _sum: ContainSumAggregateOutputType | null
+    _min: ContainMinAggregateOutputType | null
+    _max: ContainMaxAggregateOutputType | null
+  }
+
+  export type ContainAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContainSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type ContainMinAggregateOutputType = {
+    id: number | null
+    languages: string | null
+    loginPageContain: string | null
+    terms: string | null
+  }
+
+  export type ContainMaxAggregateOutputType = {
+    id: number | null
+    languages: string | null
+    loginPageContain: string | null
+    terms: string | null
+  }
+
+  export type ContainCountAggregateOutputType = {
+    id: number
+    languages: number
+    loginPageContain: number
+    terms: number
+    _all: number
+  }
+
+
+  export type ContainAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type ContainSumAggregateInputType = {
+    id?: true
+  }
+
+  export type ContainMinAggregateInputType = {
+    id?: true
+    languages?: true
+    loginPageContain?: true
+    terms?: true
+  }
+
+  export type ContainMaxAggregateInputType = {
+    id?: true
+    languages?: true
+    loginPageContain?: true
+    terms?: true
+  }
+
+  export type ContainCountAggregateInputType = {
+    id?: true
+    languages?: true
+    loginPageContain?: true
+    terms?: true
+    _all?: true
+  }
+
+  export type ContainAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contain to aggregate.
+     */
+    where?: ContainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contains to fetch.
+     */
+    orderBy?: ContainOrderByWithRelationInput | ContainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ContainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contains.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Contains
+    **/
+    _count?: true | ContainCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ContainAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ContainSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ContainMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ContainMaxAggregateInputType
+  }
+
+  export type GetContainAggregateType<T extends ContainAggregateArgs> = {
+        [P in keyof T & keyof AggregateContain]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateContain[P]>
+      : GetScalarType<T[P], AggregateContain[P]>
+  }
+
+
+
+
+  export type ContainGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ContainWhereInput
+    orderBy?: ContainOrderByWithAggregationInput | ContainOrderByWithAggregationInput[]
+    by: ContainScalarFieldEnum[] | ContainScalarFieldEnum
+    having?: ContainScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ContainCountAggregateInputType | true
+    _avg?: ContainAvgAggregateInputType
+    _sum?: ContainSumAggregateInputType
+    _min?: ContainMinAggregateInputType
+    _max?: ContainMaxAggregateInputType
+  }
+
+  export type ContainGroupByOutputType = {
+    id: number
+    languages: string
+    loginPageContain: string
+    terms: string
+    _count: ContainCountAggregateOutputType | null
+    _avg: ContainAvgAggregateOutputType | null
+    _sum: ContainSumAggregateOutputType | null
+    _min: ContainMinAggregateOutputType | null
+    _max: ContainMaxAggregateOutputType | null
+  }
+
+  type GetContainGroupByPayload<T extends ContainGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ContainGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ContainGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ContainGroupByOutputType[P]>
+            : GetScalarType<T[P], ContainGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ContainSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    languages?: boolean
+    loginPageContain?: boolean
+    terms?: boolean
+  }, ExtArgs["result"]["contain"]>
+
+  export type ContainSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    languages?: boolean
+    loginPageContain?: boolean
+    terms?: boolean
+  }, ExtArgs["result"]["contain"]>
+
+  export type ContainSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    languages?: boolean
+    loginPageContain?: boolean
+    terms?: boolean
+  }, ExtArgs["result"]["contain"]>
+
+  export type ContainSelectScalar = {
+    id?: boolean
+    languages?: boolean
+    loginPageContain?: boolean
+    terms?: boolean
+  }
+
+  export type ContainOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "languages" | "loginPageContain" | "terms", ExtArgs["result"]["contain"]>
+
+  export type $ContainPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Contain"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      languages: string
+      loginPageContain: string
+      terms: string
+    }, ExtArgs["result"]["contain"]>
+    composites: {}
+  }
+
+  type ContainGetPayload<S extends boolean | null | undefined | ContainDefaultArgs> = $Result.GetResult<Prisma.$ContainPayload, S>
+
+  type ContainCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ContainFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ContainCountAggregateInputType | true
+    }
+
+  export interface ContainDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Contain'], meta: { name: 'Contain' } }
+    /**
+     * Find zero or one Contain that matches the filter.
+     * @param {ContainFindUniqueArgs} args - Arguments to find a Contain
+     * @example
+     * // Get one Contain
+     * const contain = await prisma.contain.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ContainFindUniqueArgs>(args: SelectSubset<T, ContainFindUniqueArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Contain that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ContainFindUniqueOrThrowArgs} args - Arguments to find a Contain
+     * @example
+     * // Get one Contain
+     * const contain = await prisma.contain.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ContainFindUniqueOrThrowArgs>(args: SelectSubset<T, ContainFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contain that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContainFindFirstArgs} args - Arguments to find a Contain
+     * @example
+     * // Get one Contain
+     * const contain = await prisma.contain.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ContainFindFirstArgs>(args?: SelectSubset<T, ContainFindFirstArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Contain that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContainFindFirstOrThrowArgs} args - Arguments to find a Contain
+     * @example
+     * // Get one Contain
+     * const contain = await prisma.contain.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ContainFindFirstOrThrowArgs>(args?: SelectSubset<T, ContainFindFirstOrThrowArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Contains that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContainFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Contains
+     * const contains = await prisma.contain.findMany()
+     * 
+     * // Get first 10 Contains
+     * const contains = await prisma.contain.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const containWithIdOnly = await prisma.contain.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ContainFindManyArgs>(args?: SelectSubset<T, ContainFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Contain.
+     * @param {ContainCreateArgs} args - Arguments to create a Contain.
+     * @example
+     * // Create one Contain
+     * const Contain = await prisma.contain.create({
+     *   data: {
+     *     // ... data to create a Contain
+     *   }
+     * })
+     * 
+     */
+    create<T extends ContainCreateArgs>(args: SelectSubset<T, ContainCreateArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Contains.
+     * @param {ContainCreateManyArgs} args - Arguments to create many Contains.
+     * @example
+     * // Create many Contains
+     * const contain = await prisma.contain.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ContainCreateManyArgs>(args?: SelectSubset<T, ContainCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Contains and returns the data saved in the database.
+     * @param {ContainCreateManyAndReturnArgs} args - Arguments to create many Contains.
+     * @example
+     * // Create many Contains
+     * const contain = await prisma.contain.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Contains and only return the `id`
+     * const containWithIdOnly = await prisma.contain.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ContainCreateManyAndReturnArgs>(args?: SelectSubset<T, ContainCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Contain.
+     * @param {ContainDeleteArgs} args - Arguments to delete one Contain.
+     * @example
+     * // Delete one Contain
+     * const Contain = await prisma.contain.delete({
+     *   where: {
+     *     // ... filter to delete one Contain
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ContainDeleteArgs>(args: SelectSubset<T, ContainDeleteArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Contain.
+     * @param {ContainUpdateArgs} args - Arguments to update one Contain.
+     * @example
+     * // Update one Contain
+     * const contain = await prisma.contain.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ContainUpdateArgs>(args: SelectSubset<T, ContainUpdateArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Contains.
+     * @param {ContainDeleteManyArgs} args - Arguments to filter Contains to delete.
+     * @example
+     * // Delete a few Contains
+     * const { count } = await prisma.contain.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ContainDeleteManyArgs>(args?: SelectSubset<T, ContainDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contains.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContainUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Contains
+     * const contain = await prisma.contain.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ContainUpdateManyArgs>(args: SelectSubset<T, ContainUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Contains and returns the data updated in the database.
+     * @param {ContainUpdateManyAndReturnArgs} args - Arguments to update many Contains.
+     * @example
+     * // Update many Contains
+     * const contain = await prisma.contain.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Contains and only return the `id`
+     * const containWithIdOnly = await prisma.contain.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ContainUpdateManyAndReturnArgs>(args: SelectSubset<T, ContainUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Contain.
+     * @param {ContainUpsertArgs} args - Arguments to update or create a Contain.
+     * @example
+     * // Update or create a Contain
+     * const contain = await prisma.contain.upsert({
+     *   create: {
+     *     // ... data to create a Contain
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Contain we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ContainUpsertArgs>(args: SelectSubset<T, ContainUpsertArgs<ExtArgs>>): Prisma__ContainClient<$Result.GetResult<Prisma.$ContainPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Contains.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContainCountArgs} args - Arguments to filter Contains to count.
+     * @example
+     * // Count the number of Contains
+     * const count = await prisma.contain.count({
+     *   where: {
+     *     // ... the filter for the Contains we want to count
+     *   }
+     * })
+    **/
+    count<T extends ContainCountArgs>(
+      args?: Subset<T, ContainCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ContainCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Contain.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContainAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ContainAggregateArgs>(args: Subset<T, ContainAggregateArgs>): Prisma.PrismaPromise<GetContainAggregateType<T>>
+
+    /**
+     * Group by Contain.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ContainGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ContainGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ContainGroupByArgs['orderBy'] }
+        : { orderBy?: ContainGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ContainGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetContainGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Contain model
+   */
+  readonly fields: ContainFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Contain.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ContainClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Contain model
+   */
+  interface ContainFieldRefs {
+    readonly id: FieldRef<"Contain", 'Int'>
+    readonly languages: FieldRef<"Contain", 'String'>
+    readonly loginPageContain: FieldRef<"Contain", 'String'>
+    readonly terms: FieldRef<"Contain", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Contain findUnique
+   */
+  export type ContainFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * Filter, which Contain to fetch.
+     */
+    where: ContainWhereUniqueInput
+  }
+
+  /**
+   * Contain findUniqueOrThrow
+   */
+  export type ContainFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * Filter, which Contain to fetch.
+     */
+    where: ContainWhereUniqueInput
+  }
+
+  /**
+   * Contain findFirst
+   */
+  export type ContainFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * Filter, which Contain to fetch.
+     */
+    where?: ContainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contains to fetch.
+     */
+    orderBy?: ContainOrderByWithRelationInput | ContainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contains.
+     */
+    cursor?: ContainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contains.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contains.
+     */
+    distinct?: ContainScalarFieldEnum | ContainScalarFieldEnum[]
+  }
+
+  /**
+   * Contain findFirstOrThrow
+   */
+  export type ContainFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * Filter, which Contain to fetch.
+     */
+    where?: ContainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contains to fetch.
+     */
+    orderBy?: ContainOrderByWithRelationInput | ContainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Contains.
+     */
+    cursor?: ContainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contains.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Contains.
+     */
+    distinct?: ContainScalarFieldEnum | ContainScalarFieldEnum[]
+  }
+
+  /**
+   * Contain findMany
+   */
+  export type ContainFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * Filter, which Contains to fetch.
+     */
+    where?: ContainWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Contains to fetch.
+     */
+    orderBy?: ContainOrderByWithRelationInput | ContainOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Contains.
+     */
+    cursor?: ContainWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Contains from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Contains.
+     */
+    skip?: number
+    distinct?: ContainScalarFieldEnum | ContainScalarFieldEnum[]
+  }
+
+  /**
+   * Contain create
+   */
+  export type ContainCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Contain.
+     */
+    data: XOR<ContainCreateInput, ContainUncheckedCreateInput>
+  }
+
+  /**
+   * Contain createMany
+   */
+  export type ContainCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Contains.
+     */
+    data: ContainCreateManyInput | ContainCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Contain createManyAndReturn
+   */
+  export type ContainCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * The data used to create many Contains.
+     */
+    data: ContainCreateManyInput | ContainCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Contain update
+   */
+  export type ContainUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Contain.
+     */
+    data: XOR<ContainUpdateInput, ContainUncheckedUpdateInput>
+    /**
+     * Choose, which Contain to update.
+     */
+    where: ContainWhereUniqueInput
+  }
+
+  /**
+   * Contain updateMany
+   */
+  export type ContainUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Contains.
+     */
+    data: XOR<ContainUpdateManyMutationInput, ContainUncheckedUpdateManyInput>
+    /**
+     * Filter which Contains to update
+     */
+    where?: ContainWhereInput
+    /**
+     * Limit how many Contains to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contain updateManyAndReturn
+   */
+  export type ContainUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * The data used to update Contains.
+     */
+    data: XOR<ContainUpdateManyMutationInput, ContainUncheckedUpdateManyInput>
+    /**
+     * Filter which Contains to update
+     */
+    where?: ContainWhereInput
+    /**
+     * Limit how many Contains to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contain upsert
+   */
+  export type ContainUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Contain to update in case it exists.
+     */
+    where: ContainWhereUniqueInput
+    /**
+     * In case the Contain found by the `where` argument doesn't exist, create a new Contain with this data.
+     */
+    create: XOR<ContainCreateInput, ContainUncheckedCreateInput>
+    /**
+     * In case the Contain was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ContainUpdateInput, ContainUncheckedUpdateInput>
+  }
+
+  /**
+   * Contain delete
+   */
+  export type ContainDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+    /**
+     * Filter which Contain to delete.
+     */
+    where: ContainWhereUniqueInput
+  }
+
+  /**
+   * Contain deleteMany
+   */
+  export type ContainDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Contains to delete
+     */
+    where?: ContainWhereInput
+    /**
+     * Limit how many Contains to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Contain without action
+   */
+  export type ContainDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Contain
+     */
+    select?: ContainSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Contain
+     */
+    omit?: ContainOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3140,6 +4247,16 @@ export namespace Prisma {
   };
 
   export type ServicesScalarFieldEnum = (typeof ServicesScalarFieldEnum)[keyof typeof ServicesScalarFieldEnum]
+
+
+  export const ContainScalarFieldEnum: {
+    id: 'id',
+    languages: 'languages',
+    loginPageContain: 'loginPageContain',
+    terms: 'terms'
+  };
+
+  export type ContainScalarFieldEnum = (typeof ContainScalarFieldEnum)[keyof typeof ContainScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3354,6 +4471,55 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter<"Services"> | string
   }
 
+  export type ContainWhereInput = {
+    AND?: ContainWhereInput | ContainWhereInput[]
+    OR?: ContainWhereInput[]
+    NOT?: ContainWhereInput | ContainWhereInput[]
+    id?: IntFilter<"Contain"> | number
+    languages?: StringFilter<"Contain"> | string
+    loginPageContain?: StringFilter<"Contain"> | string
+    terms?: StringFilter<"Contain"> | string
+  }
+
+  export type ContainOrderByWithRelationInput = {
+    id?: SortOrder
+    languages?: SortOrder
+    loginPageContain?: SortOrder
+    terms?: SortOrder
+  }
+
+  export type ContainWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ContainWhereInput | ContainWhereInput[]
+    OR?: ContainWhereInput[]
+    NOT?: ContainWhereInput | ContainWhereInput[]
+    languages?: StringFilter<"Contain"> | string
+    loginPageContain?: StringFilter<"Contain"> | string
+    terms?: StringFilter<"Contain"> | string
+  }, "id" | "id">
+
+  export type ContainOrderByWithAggregationInput = {
+    id?: SortOrder
+    languages?: SortOrder
+    loginPageContain?: SortOrder
+    terms?: SortOrder
+    _count?: ContainCountOrderByAggregateInput
+    _avg?: ContainAvgOrderByAggregateInput
+    _max?: ContainMaxOrderByAggregateInput
+    _min?: ContainMinOrderByAggregateInput
+    _sum?: ContainSumOrderByAggregateInput
+  }
+
+  export type ContainScalarWhereWithAggregatesInput = {
+    AND?: ContainScalarWhereWithAggregatesInput | ContainScalarWhereWithAggregatesInput[]
+    OR?: ContainScalarWhereWithAggregatesInput[]
+    NOT?: ContainScalarWhereWithAggregatesInput | ContainScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Contain"> | number
+    languages?: StringWithAggregatesFilter<"Contain"> | string
+    loginPageContain?: StringWithAggregatesFilter<"Contain"> | string
+    terms?: StringWithAggregatesFilter<"Contain"> | string
+  }
+
   export type UsersCreateInput = {
     first_name: string
     middle_name?: string | null
@@ -3500,6 +4666,52 @@ export namespace Prisma {
     unit?: StringFieldUpdateOperationsInput | string
     inStock?: IntFieldUpdateOperationsInput | number
     description?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContainCreateInput = {
+    languages: string
+    loginPageContain: string
+    terms: string
+  }
+
+  export type ContainUncheckedCreateInput = {
+    id?: number
+    languages: string
+    loginPageContain: string
+    terms: string
+  }
+
+  export type ContainUpdateInput = {
+    languages?: StringFieldUpdateOperationsInput | string
+    loginPageContain?: StringFieldUpdateOperationsInput | string
+    terms?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContainUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    languages?: StringFieldUpdateOperationsInput | string
+    loginPageContain?: StringFieldUpdateOperationsInput | string
+    terms?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContainCreateManyInput = {
+    id?: number
+    languages: string
+    loginPageContain: string
+    terms: string
+  }
+
+  export type ContainUpdateManyMutationInput = {
+    languages?: StringFieldUpdateOperationsInput | string
+    loginPageContain?: StringFieldUpdateOperationsInput | string
+    terms?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ContainUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    languages?: StringFieldUpdateOperationsInput | string
+    loginPageContain?: StringFieldUpdateOperationsInput | string
+    terms?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3686,6 +4898,35 @@ export namespace Prisma {
     inPrice?: SortOrder
     price?: SortOrder
     inStock?: SortOrder
+  }
+
+  export type ContainCountOrderByAggregateInput = {
+    id?: SortOrder
+    languages?: SortOrder
+    loginPageContain?: SortOrder
+    terms?: SortOrder
+  }
+
+  export type ContainAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type ContainMaxOrderByAggregateInput = {
+    id?: SortOrder
+    languages?: SortOrder
+    loginPageContain?: SortOrder
+    terms?: SortOrder
+  }
+
+  export type ContainMinOrderByAggregateInput = {
+    id?: SortOrder
+    languages?: SortOrder
+    loginPageContain?: SortOrder
+    terms?: SortOrder
+  }
+
+  export type ContainSumOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {

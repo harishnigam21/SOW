@@ -143,6 +143,13 @@ exports.Prisma.ServicesScalarFieldEnum = {
   description: 'description'
 };
 
+exports.Prisma.ContainScalarFieldEnum = {
+  id: 'id',
+  languages: 'languages',
+  loginPageContain: 'loginPageContain',
+  terms: 'terms'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -161,7 +168,8 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Users: 'Users',
-  Services: 'Services'
+  Services: 'Services',
+  Contain: 'Contain'
 };
 
 /**
