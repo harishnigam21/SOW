@@ -257,6 +257,9 @@ export default function PriceList({ screen }) {
   }, []);
 
   const handleUpdate = () => {
+    if (updateList.length == 0) {
+      return;
+    }
     const updateDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/updateRecords`;
     const updateData = async () => {
       try {
@@ -276,6 +279,7 @@ export default function PriceList({ screen }) {
           alert(data.message);
           return;
         }
+        setUpdateList([]);
       } catch (error) {
         alert(error.message);
         return;
