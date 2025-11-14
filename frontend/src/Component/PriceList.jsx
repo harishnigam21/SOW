@@ -190,33 +190,8 @@ export default function PriceList({ screen }) {
     },
   ];
   const [priceList, setPriceList] = useState([]);
-  const [updateList, setUpdateList] = useState([]);
   const loaderRef = useRef(null);
   const errorRef = useRef(null);
-  const makeUpdate = (id, key, value) => {
-    const newRecord = {
-      id: id,
-      [key]: value,
-    };
-
-    setUpdateList((prev) => {
-      let found = false;
-      const nextList = prev.map((inthere) => {
-        if (inthere.id === id) {
-          found = true;
-          return {
-            ...inthere,
-            [key]: value,
-          };
-        }
-        return inthere;
-      });
-      if (!found) {
-        return [...nextList, newRecord];
-      }
-      return nextList;
-    });
-  };
   useEffect(() => {
     loaderRef.current.style.display = "flex";
     const getDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/getRecords`;
@@ -255,38 +230,86 @@ export default function PriceList({ screen }) {
     };
     getData();
   }, []);
-
-  const handleUpdate = () => {
-    if (updateList.length == 0) {
-      return;
-    }
-    const updateDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/updateRecords`;
-    const updateData = async () => {
-      try {
-        const response = await fetch(updateDataUrl, {
-          method: "PUT",
-          headers: {
-            authorization: `Bearer ${JSON.parse(
-              window.sessionStorage.getItem("accTk")
-            )}`,
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({ updateData: updateList }),
-          credentials: "include",
-        });
-        const data = await response.json();
-        if (!response.ok) {
-          alert(data.message);
-          return;
-        }
-        setUpdateList([]);
-      } catch (error) {
-        alert(error.message);
-        return;
+  const handleOnBlur = async (id, key, value) => {
+    const updateDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/updateData`;
+    const record = { id: id, [key]: value };
+    try {
+      const response = await fetch(updateDataUrl, {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${JSON.parse(
+            window.sessionStorage.getItem("accTk")
+          )}`,
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({record}),
+        credentials: "include",
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        alert(`Update failed for ID ${id}: ${data.message}`);
       }
-    };
-    updateData();
+      console.log(data.message);
+    } catch (error) {
+      alert(`Network error for ID ${id}: ${error.message}`);
+    }
   };
+  // const makeUpdate = (id, key, value) => {
+  //   const newRecord = {
+  //     id: id,
+  //     [key]: value,
+  //   };
+
+  //   setUpdateList((prev) => {
+  //     let found = false;
+  //     const nextList = prev.map((inthere) => {
+  //       if (inthere.id === id) {
+  //         found = true;
+  //         return {
+  //           ...inthere,
+  //           [key]: value,
+  //         };
+  //       }
+  //       return inthere;
+  //     });
+  //     if (!found) {
+  //       return [...nextList, newRecord];
+  //     }
+  //     return nextList;
+  //   });
+  // };
+
+  // const handleUpdate = () => {
+  //   if (updateList.length == 0) {
+  //     return;
+  //   }
+  //   const updateDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/updateRecords`;
+  //   const updateData = async () => {
+  //     try {
+  //       const response = await fetch(updateDataUrl, {
+  //         method: "PUT",
+  //         headers: {
+  //           authorization: `Bearer ${JSON.parse(
+  //             window.sessionStorage.getItem("accTk")
+  //           )}`,
+  //           "content-type": "application/json",
+  //         },
+  //         body: JSON.stringify({ updateData: updateList }),
+  //         credentials: "include",
+  //       });
+  //       const data = await response.json();
+  //       if (!response.ok) {
+  //         alert(data.message);
+  //         return;
+  //       }
+  //       setUpdateList([]);
+  //     } catch (error) {
+  //       alert(error.message);
+  //       return;
+  //     }
+  //   };
+  //   updateData();
+  // };
 
   return (
     <section className="PriceList">
@@ -354,12 +377,13 @@ export default function PriceList({ screen }) {
                       name="lgservice"
                       id={`service/${index}`}
                       value={item.service}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "service", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(inthere.id, "service", e.target.value);
                               return { ...inthere, service: e.target.value };
                             } else {
                               return inthere;
@@ -375,16 +399,13 @@ export default function PriceList({ screen }) {
                       name="inprice"
                       id={`price/${index}`}
                       value={item.inPrice}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "inPrice", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(
-                                inthere.id,
-                                "inPrice",
-                                parseInt(e.target.value)
-                              );
                               return {
                                 ...inthere,
                                 inPrice: parseInt(e.target.value),
@@ -403,16 +424,13 @@ export default function PriceList({ screen }) {
                       name="price"
                       id={`price/${index}`}
                       value={item.price}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "price", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(
-                                inthere.id,
-                                "price",
-                                parseInt(e.target.value)
-                              );
                               return {
                                 ...inthere,
                                 price: parseInt(e.target.value),
@@ -431,12 +449,13 @@ export default function PriceList({ screen }) {
                       name="unit"
                       id={`unit/${index}`}
                       value={item.unit}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "unit", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(inthere.id, "unit", e.target.value);
                               return { ...inthere, unit: e.target.value };
                             } else {
                               return inthere;
@@ -452,16 +471,13 @@ export default function PriceList({ screen }) {
                       name="instock"
                       id={`instock/${index}`}
                       value={item.inStock}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "inStock", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(
-                                inthere.id,
-                                "inStock",
-                                parseInt(e.target.value)
-                              );
                               return {
                                 ...inthere,
                                 inStock: parseInt(e.target.value),
@@ -480,16 +496,13 @@ export default function PriceList({ screen }) {
                       name="description"
                       id={`description/${index}`}
                       value={item.description}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "description", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(
-                                inthere.id,
-                                "description",
-                                e.target.value
-                              );
                               return {
                                 ...inthere,
                                 description: e.target.value,
@@ -531,12 +544,13 @@ export default function PriceList({ screen }) {
                       name="service"
                       id={`service/${index}`}
                       value={item.service}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "service", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(inthere.id, "service", e.target.value);
                               return { ...inthere, service: e.target.value };
                             } else {
                               return inthere;
@@ -552,16 +566,13 @@ export default function PriceList({ screen }) {
                       name="price"
                       id={`price/${index}`}
                       value={item.price}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "price", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(
-                                inthere.id,
-                                "price",
-                                parseInt(e.target.value)
-                              );
                               return {
                                 ...inthere,
                                 price: parseInt(e.target.value),
@@ -580,16 +591,13 @@ export default function PriceList({ screen }) {
                       name="instock"
                       id={`instock/${index}`}
                       value={item.inStock}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "inStock", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(
-                                inthere.id,
-                                "inStock",
-                                parseInt(e.target.value)
-                              );
                               return {
                                 ...inthere,
                                 inStock: parseInt(e.target.value),
@@ -608,12 +616,13 @@ export default function PriceList({ screen }) {
                       name="unit"
                       id={`unit/${index}`}
                       value={item.unit}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "unit", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(inthere.id, "unit", e.target.value);
                               return { ...inthere, unit: e.target.value };
                             } else {
                               return inthere;
@@ -648,12 +657,13 @@ export default function PriceList({ screen }) {
                       name="service"
                       id={`service/${index}`}
                       value={item.service}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "service", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(inthere.id, "service", e.target.value);
                               return { ...inthere, service: e.target.value };
                             } else {
                               return inthere;
@@ -669,16 +679,13 @@ export default function PriceList({ screen }) {
                       name="price"
                       id={`price/${index}`}
                       value={item.price}
-                      onBlur={handleUpdate}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "price", e.target.value)
+                      }
                       onChange={(e) =>
                         setPriceList((prev) =>
                           prev.map((inthere) => {
                             if (item.id == inthere.id) {
-                              makeUpdate(
-                                inthere.id,
-                                "price",
-                                parseInt(e.target.value)
-                              );
                               return {
                                 ...inthere,
                                 price: parseInt(e.target.value),

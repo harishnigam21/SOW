@@ -30,11 +30,34 @@ const updateRecord = async (req, res) => {
       console.log("Failed to update data");
       return res.status(503).json({ message: "Failed to update data" });
     }
-    console.log('"Successfully Updated Data"');
+    console.log("Successfully Updated Data");
+
     return res.status(200).json({ message: "Successfully Updated Data" });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
-module.exports = { getRecord, updateRecord };
+const onBlurUpdate = async (req, res) => {
+  const { record } = req.body;
+  if (!record) {
+    return res.status(404).json({ message: "Missing Data to update" });
+  }
+  try {
+    const { id, ...otherData } = record;
+    const update = await prisma.services.update({
+      where: { id: id },
+      data: otherData,
+    });
+    if (!update) {
+      console.log("Failed to update Data");
+      return res.status(503).json({ message: "Failed to update Data" });
+    }
+    console.log("Successfully updated Data");
+    return res.status(200).json({ message: "Successfully updated Data" });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json(error.message);
+  }
+};
+module.exports = { getRecord, updateRecord, onBlurUpdate };
