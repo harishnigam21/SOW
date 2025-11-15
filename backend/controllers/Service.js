@@ -1,7 +1,10 @@
 const prisma = require("../shortcut/prisma_initilization");
 const getRecord = async (req, res) => {
   try {
-    const getData = await prisma.services.findMany({ orderBy: { id: "asc" } });
+    const getData = await prisma.service.findMany({
+      where: { email: req.user },
+      orderBy: { id: "asc" },
+    });
     if (!getData) {
       console.log("Unable to fetch data from DB");
       return res.status(503).json({ message: "Unable to fetch data from DB" });
@@ -22,7 +25,7 @@ const updateRecord = async (req, res) => {
   }
   const updateMultipleRecord = updateData.map((record) => {
     const { id, ...otherData } = record;
-    return prisma.services.update({ where: { id: id }, data: otherData });
+    return prisma.service.update({ where: { id: id }, data: otherData });
   });
   try {
     const makeUpdate = await prisma.$transaction(updateMultipleRecord);
@@ -45,7 +48,7 @@ const onBlurUpdate = async (req, res) => {
   }
   try {
     const { id, ...otherData } = record;
-    const update = await prisma.services.update({
+    const update = await prisma.service.update({
       where: { id: id },
       data: otherData,
     });

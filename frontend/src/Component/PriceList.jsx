@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import { IoMdAddCircle } from "react-icons/io";
@@ -7,188 +6,188 @@ import { IoToggle } from "react-icons/io5";
 import { BsThreeDots } from "react-icons/bs";
 
 export default function PriceList({ screen }) {
-  const data = [
-    {
-      id: 0,
-      service: "Cloud Storage Pro",
-      inPrice: 1200,
-      price: 2500,
-      unit: "GB/month",
-      inStock: 50000,
-      description: `Securely store and access your data from anywhere in the world. Features include automatic backup, file versioning, and end-to-end encryption for maximum peace of mind.`,
-    },
-    {
-      id: 1,
-      service: "Advanced Web Hosting",
-      inPrice: 50,
-      price: 150,
-      unit: "sites/year",
-      inStock: 9500,
-      description: `High-performance hosting built for speed and reliability. Includes unlimited bandwidth, SSD storage, a free SSL certificate, and 24/7 expert technical support.`,
-    },
-    {
-      id: 2,
-      service: "Enterprise Security Suite",
-      inPrice: 98000,
-      price: 145000,
-      unit: "licenses",
-      inStock: 120,
-      description: `Comprehensive protection for large organizations. Offers centralized threat monitoring, advanced malware detection, and real-time network vulnerability scanning.`,
-    },
-    {
-      id: 3,
-      service: "Premium Video Editing Software",
-      inPrice: 1500,
-      price: 3500,
-      unit: "users/month",
-      inStock: 2800,
-      description: `Unlock professional-grade video production with our intuitive editor. Supports 4K and 8K resolution, multi-cam editing, and a vast library of special effects and transitions.`,
-    },
-    {
-      id: 4,
-      service: "Mobile App Development Kit",
-      inPrice: 43540,
-      price: 78450,
-      unit: "project/license",
-      inStock: 13640,
-      description: `Accelerate development for iOS and Android simultaneously. Contains pre-built UI components, cross-platform APIs, and comprehensive documentation to quickly launch your app.`,
-    },
-    {
-      id: 5,
-      service: "AI Chatbot Service",
-      inPrice: 800,
-      price: 1999,
-      unit: "queries/day",
-      inStock: 300000,
-      description: `Deploy a smart, conversational AI customer service agent instantly. Integrates with major platforms and offers natural language processing (NLP) to handle complex queries.`,
-    },
-    {
-      id: 6,
-      service: "Data Analytics Platform",
-      inPrice: 22000,
-      price: 49000,
-      unit: "data streams",
-      inStock: 450,
-      description: `Transform raw data into actionable insights with powerful visualization tools. Track KPIs, monitor trends, and create custom reports using real-time data ingestion.`,
-    },
-    {
-      id: 7,
-      service: "Custom WordPress Theme",
-      inPrice: 5000,
-      price: 12000,
-      unit: "theme/sale",
-      inStock: 9999,
-      description: `A fully responsive, unique theme built specifically for your brand. Optimized for fast loading speeds and easy customization via the built-in visual editor.`,
-    },
-    {
-      id: 8,
-      service: "VPN Access Global",
-      inPrice: 5,
-      price: 10,
-      unit: "users/month",
-      inStock: 800000,
-      description: `Browse securely and anonymously with access to thousands of servers worldwide. Protects your privacy from public Wi-Fi threats and bypasses geographical content restrictions.`,
-    },
-    {
-      id: 9,
-      service: "E-commerce Plugin Bundle",
-      inPrice: 300,
-      price: 750,
-      unit: "download",
-      inStock: 5000,
-      description: `A collection of essential tools for any online store. Includes plugins for advanced inventory management, detailed analytics, automated email marketing, and checkout optimization.`,
-    },
-    {
-      id: 10,
-      service: "Cloud Storage Pro",
-      inPrice: 1200,
-      price: 2500,
-      unit: "GB/month",
-      inStock: 50000,
-      description: `Securely store and access your data from anywhere in the world. Features include automatic backup, file versioning, and end-to-end encryption for maximum peace of mind.`,
-    },
-    {
-      id: 11,
-      service: "Advanced Web Hosting",
-      inPrice: 50,
-      price: 150,
-      unit: "sites/year",
-      inStock: 9500,
-      description: `High-performance hosting built for speed and reliability. Includes unlimited bandwidth, SSD storage, a free SSL certificate, and 24/7 expert technical support.`,
-    },
-    {
-      id: 12,
-      service: "Enterprise Security Suite",
-      inPrice: 98000,
-      price: 145000,
-      unit: "licenses",
-      inStock: 120,
-      description: `Comprehensive protection for large organizations. Offers centralized threat monitoring, advanced malware detection, and real-time network vulnerability scanning.`,
-    },
-    {
-      id: 13,
-      service: "Premium Video Editing Software",
-      inPrice: 1500,
-      price: 3500,
-      unit: "users/month",
-      inStock: 2800,
-      description: `Unlock professional-grade video production with our intuitive editor. Supports 4K and 8K resolution, multi-cam editing, and a vast library of special effects and transitions.`,
-    },
-    {
-      id: 14,
-      service: "Mobile App Development Kit",
-      inPrice: 43540,
-      price: 78450,
-      unit: "project/license",
-      inStock: 13640,
-      description: `Accelerate development for iOS and Android simultaneously. Contains pre-built UI components, cross-platform APIs, and comprehensive documentation to quickly launch your app.`,
-    },
-    {
-      id: 15,
-      service: "AI Chatbot Service",
-      inPrice: 800,
-      price: 1999,
-      unit: "queries/day",
-      inStock: 300000,
-      description: `Deploy a smart, conversational AI customer service agent instantly. Integrates with major platforms and offers natural language processing (NLP) to handle complex queries.`,
-    },
-    {
-      id: 16,
-      service: "Data Analytics Platform",
-      inPrice: 22000,
-      price: 49000,
-      unit: "data streams",
-      inStock: 450,
-      description: `Transform raw data into actionable insights with powerful visualization tools. Track KPIs, monitor trends, and create custom reports using real-time data ingestion.`,
-    },
-    {
-      id: 17,
-      service: "Custom WordPress Theme",
-      inPrice: 5000,
-      price: 12000,
-      unit: "theme/sale",
-      inStock: 9999,
-      description: `A fully responsive, unique theme built specifically for your brand. Optimized for fast loading speeds and easy customization via the built-in visual editor.`,
-    },
-    {
-      id: 18,
-      service: "VPN Access Global",
-      inPrice: 5,
-      price: 10,
-      unit: "users/month",
-      inStock: 800000,
-      description: `Browse securely and anonymously with access to thousands of servers worldwide. Protects your privacy from public Wi-Fi threats and bypasses geographical content restrictions.`,
-    },
-    {
-      id: 19,
-      service: "E-commerce Plugin Bundle",
-      inPrice: 300,
-      price: 750,
-      unit: "download",
-      inStock: 5000,
-      description: `A collection of essential tools for any online store. Includes plugins for advanced inventory management, detailed analytics, automated email marketing, and checkout optimization.`,
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 0,
+  //     service: "Cloud Storage Pro",
+  //     inPrice: 1200,
+  //     price: 2500,
+  //     unit: "GB/month",
+  //     inStock: 50000,
+  //     description: `Securely store and access your data from anywhere in the world. Features include automatic backup, file versioning, and end-to-end encryption for maximum peace of mind.`,
+  //   },
+  //   {
+  //     id: 1,
+  //     service: "Advanced Web Hosting",
+  //     inPrice: 50,
+  //     price: 150,
+  //     unit: "sites/year",
+  //     inStock: 9500,
+  //     description: `High-performance hosting built for speed and reliability. Includes unlimited bandwidth, SSD storage, a free SSL certificate, and 24/7 expert technical support.`,
+  //   },
+  //   {
+  //     id: 2,
+  //     service: "Enterprise Security Suite",
+  //     inPrice: 98000,
+  //     price: 145000,
+  //     unit: "licenses",
+  //     inStock: 120,
+  //     description: `Comprehensive protection for large organizations. Offers centralized threat monitoring, advanced malware detection, and real-time network vulnerability scanning.`,
+  //   },
+  //   {
+  //     id: 3,
+  //     service: "Premium Video Editing Software",
+  //     inPrice: 1500,
+  //     price: 3500,
+  //     unit: "users/month",
+  //     inStock: 2800,
+  //     description: `Unlock professional-grade video production with our intuitive editor. Supports 4K and 8K resolution, multi-cam editing, and a vast library of special effects and transitions.`,
+  //   },
+  //   {
+  //     id: 4,
+  //     service: "Mobile App Development Kit",
+  //     inPrice: 43540,
+  //     price: 78450,
+  //     unit: "project/license",
+  //     inStock: 13640,
+  //     description: `Accelerate development for iOS and Android simultaneously. Contains pre-built UI components, cross-platform APIs, and comprehensive documentation to quickly launch your app.`,
+  //   },
+  //   {
+  //     id: 5,
+  //     service: "AI Chatbot Service",
+  //     inPrice: 800,
+  //     price: 1999,
+  //     unit: "queries/day",
+  //     inStock: 300000,
+  //     description: `Deploy a smart, conversational AI customer service agent instantly. Integrates with major platforms and offers natural language processing (NLP) to handle complex queries.`,
+  //   },
+  //   {
+  //     id: 6,
+  //     service: "Data Analytics Platform",
+  //     inPrice: 22000,
+  //     price: 49000,
+  //     unit: "data streams",
+  //     inStock: 450,
+  //     description: `Transform raw data into actionable insights with powerful visualization tools. Track KPIs, monitor trends, and create custom reports using real-time data ingestion.`,
+  //   },
+  //   {
+  //     id: 7,
+  //     service: "Custom WordPress Theme",
+  //     inPrice: 5000,
+  //     price: 12000,
+  //     unit: "theme/sale",
+  //     inStock: 9999,
+  //     description: `A fully responsive, unique theme built specifically for your brand. Optimized for fast loading speeds and easy customization via the built-in visual editor.`,
+  //   },
+  //   {
+  //     id: 8,
+  //     service: "VPN Access Global",
+  //     inPrice: 5,
+  //     price: 10,
+  //     unit: "users/month",
+  //     inStock: 800000,
+  //     description: `Browse securely and anonymously with access to thousands of servers worldwide. Protects your privacy from public Wi-Fi threats and bypasses geographical content restrictions.`,
+  //   },
+  //   {
+  //     id: 9,
+  //     service: "E-commerce Plugin Bundle",
+  //     inPrice: 300,
+  //     price: 750,
+  //     unit: "download",
+  //     inStock: 5000,
+  //     description: `A collection of essential tools for any online store. Includes plugins for advanced inventory management, detailed analytics, automated email marketing, and checkout optimization.`,
+  //   },
+  //   {
+  //     id: 10,
+  //     service: "Cloud Storage Pro",
+  //     inPrice: 1200,
+  //     price: 2500,
+  //     unit: "GB/month",
+  //     inStock: 50000,
+  //     description: `Securely store and access your data from anywhere in the world. Features include automatic backup, file versioning, and end-to-end encryption for maximum peace of mind.`,
+  //   },
+  //   {
+  //     id: 11,
+  //     service: "Advanced Web Hosting",
+  //     inPrice: 50,
+  //     price: 150,
+  //     unit: "sites/year",
+  //     inStock: 9500,
+  //     description: `High-performance hosting built for speed and reliability. Includes unlimited bandwidth, SSD storage, a free SSL certificate, and 24/7 expert technical support.`,
+  //   },
+  //   {
+  //     id: 12,
+  //     service: "Enterprise Security Suite",
+  //     inPrice: 98000,
+  //     price: 145000,
+  //     unit: "licenses",
+  //     inStock: 120,
+  //     description: `Comprehensive protection for large organizations. Offers centralized threat monitoring, advanced malware detection, and real-time network vulnerability scanning.`,
+  //   },
+  //   {
+  //     id: 13,
+  //     service: "Premium Video Editing Software",
+  //     inPrice: 1500,
+  //     price: 3500,
+  //     unit: "users/month",
+  //     inStock: 2800,
+  //     description: `Unlock professional-grade video production with our intuitive editor. Supports 4K and 8K resolution, multi-cam editing, and a vast library of special effects and transitions.`,
+  //   },
+  //   {
+  //     id: 14,
+  //     service: "Mobile App Development Kit",
+  //     inPrice: 43540,
+  //     price: 78450,
+  //     unit: "project/license",
+  //     inStock: 13640,
+  //     description: `Accelerate development for iOS and Android simultaneously. Contains pre-built UI components, cross-platform APIs, and comprehensive documentation to quickly launch your app.`,
+  //   },
+  //   {
+  //     id: 15,
+  //     service: "AI Chatbot Service",
+  //     inPrice: 800,
+  //     price: 1999,
+  //     unit: "queries/day",
+  //     inStock: 300000,
+  //     description: `Deploy a smart, conversational AI customer service agent instantly. Integrates with major platforms and offers natural language processing (NLP) to handle complex queries.`,
+  //   },
+  //   {
+  //     id: 16,
+  //     service: "Data Analytics Platform",
+  //     inPrice: 22000,
+  //     price: 49000,
+  //     unit: "data streams",
+  //     inStock: 450,
+  //     description: `Transform raw data into actionable insights with powerful visualization tools. Track KPIs, monitor trends, and create custom reports using real-time data ingestion.`,
+  //   },
+  //   {
+  //     id: 17,
+  //     service: "Custom WordPress Theme",
+  //     inPrice: 5000,
+  //     price: 12000,
+  //     unit: "theme/sale",
+  //     inStock: 9999,
+  //     description: `A fully responsive, unique theme built specifically for your brand. Optimized for fast loading speeds and easy customization via the built-in visual editor.`,
+  //   },
+  //   {
+  //     id: 18,
+  //     service: "VPN Access Global",
+  //     inPrice: 5,
+  //     price: 10,
+  //     unit: "users/month",
+  //     inStock: 800000,
+  //     description: `Browse securely and anonymously with access to thousands of servers worldwide. Protects your privacy from public Wi-Fi threats and bypasses geographical content restrictions.`,
+  //   },
+  //   {
+  //     id: 19,
+  //     service: "E-commerce Plugin Bundle",
+  //     inPrice: 300,
+  //     price: 750,
+  //     unit: "download",
+  //     inStock: 5000,
+  //     description: `A collection of essential tools for any online store. Includes plugins for advanced inventory management, detailed analytics, automated email marketing, and checkout optimization.`,
+  //   },
+  // ];
   const [priceList, setPriceList] = useState([]);
   const loaderRef = useRef(null);
   const errorRef = useRef(null);
@@ -374,7 +373,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="text"
-                      name="lgservice"
+                      name={`service/${index}`}
                       id={`service/${index}`}
                       value={item.service}
                       onBlur={(e) =>
@@ -396,8 +395,8 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="number"
-                      name="inprice"
-                      id={`price/${index}`}
+                      name={`inprice/${index}`}
+                      id={`inprice/${index}`}
                       value={item.inPrice}
                       onBlur={(e) =>
                         handleOnBlur(
@@ -425,7 +424,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="number"
-                      name="price"
+                      name={`price/${index}`}
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
@@ -450,7 +449,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="text"
-                      name="unit"
+                      name={`unit/${index}`}
                       id={`unit/${index}`}
                       value={item.unit}
                       onBlur={(e) =>
@@ -472,7 +471,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="number"
-                      name="instock"
+                      name={`instock/${index}`}
                       id={`instock/${index}`}
                       value={item.inStock}
                       onBlur={(e) =>
@@ -501,7 +500,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="text"
-                      name="description"
+                      name={`description/${index}`}
                       id={`description/${index}`}
                       value={item.description}
                       onBlur={(e) =>
@@ -549,7 +548,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="text"
-                      name="service"
+                      name={`service/${index}`}
                       id={`service/${index}`}
                       value={item.service}
                       onBlur={(e) =>
@@ -571,7 +570,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="number"
-                      name="price"
+                      name={`price/${index}`}
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
@@ -596,7 +595,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="number"
-                      name="instock"
+                      name={`instock/${index}`}
                       id={`instock/${index}`}
                       value={item.inStock}
                       onBlur={(e) =>
@@ -625,7 +624,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="text"
-                      name="unit"
+                      name={`unit/${index}`}
                       id={`unit/${index}`}
                       value={item.unit}
                       onBlur={(e) =>
@@ -666,7 +665,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="text"
-                      name="service"
+                      name={`service/${index}`}
                       id={`service/${index}`}
                       value={item.service}
                       onBlur={(e) =>
@@ -688,7 +687,7 @@ export default function PriceList({ screen }) {
                   <td>
                     <input
                       type="number"
-                      name="price"
+                      name={`price/${index}`}
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>

@@ -105,8 +105,9 @@ exports.Prisma.UsersScalarFieldEnum = {
   reference_token: 'reference_token'
 };
 
-exports.Prisma.ServicesScalarFieldEnum = {
+exports.Prisma.ServiceScalarFieldEnum = {
   id: 'id',
+  email: 'email',
   service: 'service',
   inPrice: 'inPrice',
   price: 'price',
@@ -141,7 +142,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Users: 'Users',
-  Services: 'Services',
+  Service: 'Service',
   Contain: 'Contain'
 };
 /**
@@ -196,13 +197,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../prisma/app/generated/prisma/client\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Users {\n  id              Int     @id @unique(map: \"user_id_UNIQUE\") @default(autoincrement())\n  first_name      String  @db.VarChar(128)\n  middle_name     String? @db.VarChar(128)\n  last_name       String  @db.VarChar(128)\n  gender          String  @db.VarChar(45)\n  mobile_no       String  @unique(map: \"mobile_no_UNIQUE\") @db.VarChar(20)\n  email           String  @unique(map: \"email_UNIQUE\") @db.VarChar(128)\n  password        String  @db.VarChar(512)\n  reference_token String  @unique(map: \"reference_token_UNIQUE\") @db.VarChar(512)\n}\n\nmodel Services {\n  id          Int    @id @unique(map: \"service_id_UNIQUE\") @default(autoincrement())\n  service     String @db.VarChar(256)\n  inPrice     Int\n  price       Int\n  unit        String @db.VarChar(128)\n  inStock     Int\n  description String @db.VarChar(512)\n}\n\nmodel Contain {\n  id        Int    @id @unique(map: \"contain_id_UNIQUE\") @default(autoincrement())\n  languages String @db.Text\n  page      String @db.Text\n  target    String @db.Text\n  value     String @db.Text\n}\n",
-  "inlineSchemaHash": "88cbc246d7e4ef82f1e22938f55f38b8fd6c3e36a86765e5623715f9b55bf0d3",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../prisma/app/generated/prisma/client\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Users {\n  id              Int     @id @unique(map: \"user_id_UNIQUE\") @default(autoincrement())\n  first_name      String  @db.VarChar(128)\n  middle_name     String? @db.VarChar(128)\n  last_name       String  @db.VarChar(128)\n  gender          String  @db.VarChar(45)\n  mobile_no       String  @unique(map: \"mobile_no_UNIQUE\") @db.VarChar(20)\n  email           String  @unique(map: \"email_UNIQUE\") @db.VarChar(128)\n  password        String  @db.VarChar(512)\n  reference_token String  @unique(map: \"reference_token_UNIQUE\") @db.VarChar(512)\n}\n\nmodel Service {\n  id          Int    @id @unique(map: \"service_id_UNIQUE\") @default(autoincrement())\n  email       String @db.VarChar(128)\n  service     String @db.VarChar(256)\n  inPrice     Int\n  price       Int\n  unit        String @db.VarChar(128)\n  inStock     Int\n  description String @db.VarChar(512)\n}\n\nmodel Contain {\n  id        Int    @id @unique(map: \"contain_id_UNIQUE\") @default(autoincrement())\n  languages String @db.Text\n  page      String @db.Text\n  target    String @db.Text\n  value     String @db.Text\n}\n",
+  "inlineSchemaHash": "fd8ca734eb29f053bc9408a92e61734830d07b80c2e7d179cd847f0b8cf8a3d3",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"middle_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile_no\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reference_token\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Services\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"service\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"inPrice\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"unit\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"inStock\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Contain\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"languages\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"page\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"target\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Users\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"first_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"middle_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"last_name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"gender\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"mobile_no\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reference_token\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Service\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"inPrice\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"unit\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"inStock\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Contain\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"languages\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"page\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"target\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"value\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

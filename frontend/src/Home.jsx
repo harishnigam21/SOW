@@ -1,8 +1,12 @@
-import { useEffect } from "react";
+/* eslint-disable no-unused-vars */
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { menulist } from "./assets/menulist";
 import { Outlet } from "react-router-dom";
-export default function Home({screen}) {
+import InHeader from "./common component/InHeader";
+export default function Home({ screen }) {
+  const [inHeaderBar, setInHeaderBar] = useState(true);
   const navigate = useNavigate();
   const veifyUser = async () => {
     const verifyUrl = `${import.meta.env.VITE_BACKEND_HOST}/verify`;
@@ -30,35 +34,54 @@ export default function Home({screen}) {
   useEffect(() => {
     veifyUser();
   }, []);
+  const [user, setUser] = useState(
+    window.localStorage.getItem("user")
+      ? JSON.parse(window.localStorage.getItem("user"))
+      : {
+          email: "abcde@gmail.com",
+          first_name: "ABCD",
+          last_name: "XYZ",
+          gender: "none",
+          mobile_no: "7894561230",
+        }
+  );
   return (
-    <section className="inHome">
-      {screen.width>1080 &&
-      <article className="inHomeLeft">
-        <strong>Menu</strong>
-        {menulist.map((list, index) => (
-          <Link
-            className="menuListItem"
-            to={list.path}
-            key={`menulist/${index}`}
-          >
-            <list.icon className="icon" />
-            <strong
-              style={{
-                color:
-                  list.path == window.location.pathname.split("/").slice(-1)
-                    ? "blue"
-                    : "black",
-              }}
-            >
-              {list.name}
-            </strong>
-          </Link>
-        ))}
-      </article>
-      }
-      <article className="inHomeRight">
-        <Outlet/>
-      </article>
-    </section>
+    <>
+      <InHeader
+        screen={screen}
+        user={user}
+        inHeaderBar={inHeaderBar}
+        setInHeaderBar={setInHeaderBar}
+      />
+      <section className="inHome">
+        {inHeaderBar && (
+          <article className="inHomeLeft">
+            <strong>Menu</strong>
+            {menulist.map((list, index) => (
+              <Link
+                className="menuListItem"
+                to={list.path}
+                key={`menulist/${index}`}
+              >
+                <list.icon className="icon" />
+                <strong
+                  style={{
+                    color:
+                      list.path == window.location.pathname.split("/").slice(-1)
+                        ? "blue"
+                        : "black",
+                  }}
+                >
+                  {list.name}
+                </strong>
+              </Link>
+            ))}
+          </article>
+        )}
+        <article className="inHomeRight">
+          <Outlet context={user} />
+        </article>
+      </section>
+    </>
   );
 }

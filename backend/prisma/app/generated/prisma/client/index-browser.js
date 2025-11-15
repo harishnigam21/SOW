@@ -133,8 +133,9 @@ exports.Prisma.UsersScalarFieldEnum = {
   reference_token: 'reference_token'
 };
 
-exports.Prisma.ServicesScalarFieldEnum = {
+exports.Prisma.ServiceScalarFieldEnum = {
   id: 'id',
+  email: 'email',
   service: 'service',
   inPrice: 'inPrice',
   price: 'price',
@@ -169,7 +170,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   Users: 'Users',
-  Services: 'Services',
+  Service: 'Service',
   Contain: 'Contain'
 };
 

@@ -59,6 +59,13 @@ const SignIn = async (req, res) => {
     return res.status(200).json({
       message: "Successfully Logged In",
       accessToken: accessToken,
+      user: {
+        mobile_no: validUser.mobile_no,
+        email: validUser.email,
+        first_name: validUser.first_name,
+        last_name: validUser.last_name,
+        gender: validUser.gender,
+      },
     });
   } catch (error) {
     console.log(error);

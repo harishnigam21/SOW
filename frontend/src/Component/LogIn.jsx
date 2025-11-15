@@ -30,6 +30,7 @@ export default function LogIn({ switchLanguage, Contain }) {
             "accTk",
             JSON.stringify(data.accessToken)
           );
+          window.localStorage.setItem("user", JSON.stringify(data.user));
           setTimeout(() => {
             navigate("/home");
           }, 2000);
