@@ -26,7 +26,7 @@ article {
   min-height: 100vh;
   justify-content: space-between;
   > img {
-    position: absolute;
+    position: fixed;
     top: 0;
     width: 100%;
     height: 100%;
@@ -236,7 +236,6 @@ a {
   align-items: center;
   padding: 1rem;
   border-radius: 1rem;
-
   h1 {
     color: white;
     margin: 0;
@@ -253,8 +252,6 @@ a {
     padding: 2rem;
     border-radius: 1rem;
     text-align: center;
-    max-height: 100vh;
-    overflow: scroll;
     p {
       font-size: 14px;
       margin: 0;
