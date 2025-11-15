@@ -146,8 +146,9 @@ exports.Prisma.ServicesScalarFieldEnum = {
 exports.Prisma.ContainScalarFieldEnum = {
   id: 'id',
   languages: 'languages',
-  loginPageContain: 'loginPageContain',
-  terms: 'terms'
+  page: 'page',
+  target: 'target',
+  value: 'value'
 };
 
 exports.Prisma.SortOrder = {

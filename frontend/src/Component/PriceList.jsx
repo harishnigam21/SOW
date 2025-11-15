@@ -242,7 +242,7 @@ export default function PriceList({ screen }) {
           )}`,
           "content-type": "application/json",
         },
-        body: JSON.stringify({record}),
+        body: JSON.stringify({ record }),
         credentials: "include",
       });
       const data = await response.json();
@@ -400,7 +400,11 @@ export default function PriceList({ screen }) {
                       id={`price/${index}`}
                       value={item.inPrice}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "inPrice", e.target.value)
+                        handleOnBlur(
+                          item.id,
+                          "inPrice",
+                          parseInt(e.target.value)
+                        )
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -425,7 +429,7 @@ export default function PriceList({ screen }) {
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", e.target.value)
+                        handleOnBlur(item.id, "price", parseInt(e.target.value))
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -472,7 +476,11 @@ export default function PriceList({ screen }) {
                       id={`instock/${index}`}
                       value={item.inStock}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "inStock", e.target.value)
+                        handleOnBlur(
+                          item.id,
+                          "inStock",
+                          parseInt(e.target.value)
+                        )
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -567,7 +575,7 @@ export default function PriceList({ screen }) {
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", e.target.value)
+                        handleOnBlur(item.id, "price", parseInt(e.target.value))
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -592,7 +600,11 @@ export default function PriceList({ screen }) {
                       id={`instock/${index}`}
                       value={item.inStock}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "inStock", e.target.value)
+                        handleOnBlur(
+                          item.id,
+                          "inStock",
+                          parseInt(e.target.value)
+                        )
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -680,7 +692,7 @@ export default function PriceList({ screen }) {
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", e.target.value)
+                        handleOnBlur(item.id, "price", parseInt(e.target.value))
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>

@@ -3214,22 +3214,25 @@ export namespace Prisma {
   export type ContainMinAggregateOutputType = {
     id: number | null
     languages: string | null
-    loginPageContain: string | null
-    terms: string | null
+    page: string | null
+    target: string | null
+    value: string | null
   }
 
   export type ContainMaxAggregateOutputType = {
     id: number | null
     languages: string | null
-    loginPageContain: string | null
-    terms: string | null
+    page: string | null
+    target: string | null
+    value: string | null
   }
 
   export type ContainCountAggregateOutputType = {
     id: number
     languages: number
-    loginPageContain: number
-    terms: number
+    page: number
+    target: number
+    value: number
     _all: number
   }
 
@@ -3245,22 +3248,25 @@ export namespace Prisma {
   export type ContainMinAggregateInputType = {
     id?: true
     languages?: true
-    loginPageContain?: true
-    terms?: true
+    page?: true
+    target?: true
+    value?: true
   }
 
   export type ContainMaxAggregateInputType = {
     id?: true
     languages?: true
-    loginPageContain?: true
-    terms?: true
+    page?: true
+    target?: true
+    value?: true
   }
 
   export type ContainCountAggregateInputType = {
     id?: true
     languages?: true
-    loginPageContain?: true
-    terms?: true
+    page?: true
+    target?: true
+    value?: true
     _all?: true
   }
 
@@ -3353,8 +3359,9 @@ export namespace Prisma {
   export type ContainGroupByOutputType = {
     id: number
     languages: string
-    loginPageContain: string
-    terms: string
+    page: string
+    target: string
+    value: string
     _count: ContainCountAggregateOutputType | null
     _avg: ContainAvgAggregateOutputType | null
     _sum: ContainSumAggregateOutputType | null
@@ -3379,32 +3386,36 @@ export namespace Prisma {
   export type ContainSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     languages?: boolean
-    loginPageContain?: boolean
-    terms?: boolean
+    page?: boolean
+    target?: boolean
+    value?: boolean
   }, ExtArgs["result"]["contain"]>
 
   export type ContainSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     languages?: boolean
-    loginPageContain?: boolean
-    terms?: boolean
+    page?: boolean
+    target?: boolean
+    value?: boolean
   }, ExtArgs["result"]["contain"]>
 
   export type ContainSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     languages?: boolean
-    loginPageContain?: boolean
-    terms?: boolean
+    page?: boolean
+    target?: boolean
+    value?: boolean
   }, ExtArgs["result"]["contain"]>
 
   export type ContainSelectScalar = {
     id?: boolean
     languages?: boolean
-    loginPageContain?: boolean
-    terms?: boolean
+    page?: boolean
+    target?: boolean
+    value?: boolean
   }
 
-  export type ContainOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "languages" | "loginPageContain" | "terms", ExtArgs["result"]["contain"]>
+  export type ContainOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "languages" | "page" | "target" | "value", ExtArgs["result"]["contain"]>
 
   export type $ContainPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Contain"
@@ -3412,8 +3423,9 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       languages: string
-      loginPageContain: string
-      terms: string
+      page: string
+      target: string
+      value: string
     }, ExtArgs["result"]["contain"]>
     composites: {}
   }
@@ -3839,8 +3851,9 @@ export namespace Prisma {
   interface ContainFieldRefs {
     readonly id: FieldRef<"Contain", 'Int'>
     readonly languages: FieldRef<"Contain", 'String'>
-    readonly loginPageContain: FieldRef<"Contain", 'String'>
-    readonly terms: FieldRef<"Contain", 'String'>
+    readonly page: FieldRef<"Contain", 'String'>
+    readonly target: FieldRef<"Contain", 'String'>
+    readonly value: FieldRef<"Contain", 'String'>
   }
     
 
@@ -4252,8 +4265,9 @@ export namespace Prisma {
   export const ContainScalarFieldEnum: {
     id: 'id',
     languages: 'languages',
-    loginPageContain: 'loginPageContain',
-    terms: 'terms'
+    page: 'page',
+    target: 'target',
+    value: 'value'
   };
 
   export type ContainScalarFieldEnum = (typeof ContainScalarFieldEnum)[keyof typeof ContainScalarFieldEnum]
@@ -4477,15 +4491,17 @@ export namespace Prisma {
     NOT?: ContainWhereInput | ContainWhereInput[]
     id?: IntFilter<"Contain"> | number
     languages?: StringFilter<"Contain"> | string
-    loginPageContain?: StringFilter<"Contain"> | string
-    terms?: StringFilter<"Contain"> | string
+    page?: StringFilter<"Contain"> | string
+    target?: StringFilter<"Contain"> | string
+    value?: StringFilter<"Contain"> | string
   }
 
   export type ContainOrderByWithRelationInput = {
     id?: SortOrder
     languages?: SortOrder
-    loginPageContain?: SortOrder
-    terms?: SortOrder
+    page?: SortOrder
+    target?: SortOrder
+    value?: SortOrder
   }
 
   export type ContainWhereUniqueInput = Prisma.AtLeast<{
@@ -4494,15 +4510,17 @@ export namespace Prisma {
     OR?: ContainWhereInput[]
     NOT?: ContainWhereInput | ContainWhereInput[]
     languages?: StringFilter<"Contain"> | string
-    loginPageContain?: StringFilter<"Contain"> | string
-    terms?: StringFilter<"Contain"> | string
+    page?: StringFilter<"Contain"> | string
+    target?: StringFilter<"Contain"> | string
+    value?: StringFilter<"Contain"> | string
   }, "id" | "id">
 
   export type ContainOrderByWithAggregationInput = {
     id?: SortOrder
     languages?: SortOrder
-    loginPageContain?: SortOrder
-    terms?: SortOrder
+    page?: SortOrder
+    target?: SortOrder
+    value?: SortOrder
     _count?: ContainCountOrderByAggregateInput
     _avg?: ContainAvgOrderByAggregateInput
     _max?: ContainMaxOrderByAggregateInput
@@ -4516,8 +4534,9 @@ export namespace Prisma {
     NOT?: ContainScalarWhereWithAggregatesInput | ContainScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Contain"> | number
     languages?: StringWithAggregatesFilter<"Contain"> | string
-    loginPageContain?: StringWithAggregatesFilter<"Contain"> | string
-    terms?: StringWithAggregatesFilter<"Contain"> | string
+    page?: StringWithAggregatesFilter<"Contain"> | string
+    target?: StringWithAggregatesFilter<"Contain"> | string
+    value?: StringWithAggregatesFilter<"Contain"> | string
   }
 
   export type UsersCreateInput = {
@@ -4670,48 +4689,55 @@ export namespace Prisma {
 
   export type ContainCreateInput = {
     languages: string
-    loginPageContain: string
-    terms: string
+    page: string
+    target: string
+    value: string
   }
 
   export type ContainUncheckedCreateInput = {
     id?: number
     languages: string
-    loginPageContain: string
-    terms: string
+    page: string
+    target: string
+    value: string
   }
 
   export type ContainUpdateInput = {
     languages?: StringFieldUpdateOperationsInput | string
-    loginPageContain?: StringFieldUpdateOperationsInput | string
-    terms?: StringFieldUpdateOperationsInput | string
+    page?: StringFieldUpdateOperationsInput | string
+    target?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContainUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     languages?: StringFieldUpdateOperationsInput | string
-    loginPageContain?: StringFieldUpdateOperationsInput | string
-    terms?: StringFieldUpdateOperationsInput | string
+    page?: StringFieldUpdateOperationsInput | string
+    target?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContainCreateManyInput = {
     id?: number
     languages: string
-    loginPageContain: string
-    terms: string
+    page: string
+    target: string
+    value: string
   }
 
   export type ContainUpdateManyMutationInput = {
     languages?: StringFieldUpdateOperationsInput | string
-    loginPageContain?: StringFieldUpdateOperationsInput | string
-    terms?: StringFieldUpdateOperationsInput | string
+    page?: StringFieldUpdateOperationsInput | string
+    target?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
   }
 
   export type ContainUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     languages?: StringFieldUpdateOperationsInput | string
-    loginPageContain?: StringFieldUpdateOperationsInput | string
-    terms?: StringFieldUpdateOperationsInput | string
+    page?: StringFieldUpdateOperationsInput | string
+    target?: StringFieldUpdateOperationsInput | string
+    value?: StringFieldUpdateOperationsInput | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -4903,8 +4929,9 @@ export namespace Prisma {
   export type ContainCountOrderByAggregateInput = {
     id?: SortOrder
     languages?: SortOrder
-    loginPageContain?: SortOrder
-    terms?: SortOrder
+    page?: SortOrder
+    target?: SortOrder
+    value?: SortOrder
   }
 
   export type ContainAvgOrderByAggregateInput = {
@@ -4914,15 +4941,17 @@ export namespace Prisma {
   export type ContainMaxOrderByAggregateInput = {
     id?: SortOrder
     languages?: SortOrder
-    loginPageContain?: SortOrder
-    terms?: SortOrder
+    page?: SortOrder
+    target?: SortOrder
+    value?: SortOrder
   }
 
   export type ContainMinOrderByAggregateInput = {
     id?: SortOrder
     languages?: SortOrder
-    loginPageContain?: SortOrder
-    terms?: SortOrder
+    page?: SortOrder
+    target?: SortOrder
+    value?: SortOrder
   }
 
   export type ContainSumOrderByAggregateInput = {

@@ -4,7 +4,12 @@ import { FaBarsStaggered } from "react-icons/fa6";
 import { ImCross } from "react-icons/im";
 import { useState } from "react";
 
-export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
+export default function Header({
+  Contain,
+  screen,
+  switchLanguage,
+  setSwitchLanguage,
+}) {
   const [navToggle, setNavToggle] = useState(false);
   const [lgToggle, setLGToggle] = useState(false);
   return (
@@ -53,10 +58,9 @@ export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
       )}
       <section className="hesec3">
         <article className="laguageSec">
-          {navlist[switchLanguage]
-            .slice(-1)[0]
-            .languages.filter(
-              (item) => item.name.toLowerCase() == switchLanguage.toLowerCase()
+          {Object.keys(Contain)
+            .filter(
+              (item) => item.toLowerCase() == switchLanguage.toLowerCase()
             )
             .map((item) => (
               <div
@@ -64,27 +68,31 @@ export default function Header({ screen, switchLanguage, setSwitchLanguage }) {
                 className="lsdefault"
                 onClick={() => setLGToggle(true)}
               >
-                <h4>{item.name}</h4>
-                <img src={item.flag} alt="default language flag" />
+                <h4>{item[0].toUpperCase() + item.slice(1).toLowerCase()}</h4>
+                <img
+                  src={Contain[switchLanguage].flag.img}
+                  alt="default language flag"
+                />
               </div>
             ))}
           {lgToggle && (
             <article className="languageSwitcher">
-              {navlist[switchLanguage]
-                .slice(-1)[0]
-                .languages.map((lang, index) => (
-                  <div
-                    key={`lg/${index}`}
-                    className="lang"
-                    onClick={() => {
-                      setSwitchLanguage(lang.name.toLowerCase());
-                      setLGToggle(false);
-                    }}
-                  >
-                    <p>{lang.name}</p>
-                    <img src={lang.flag} alt="default language flag" />
-                  </div>
-                ))}
+              {Object.keys(Contain).map((lang, index) => (
+                <div
+                  key={`lg/${index}`}
+                  className="lang"
+                  onClick={() => {
+                    setSwitchLanguage(lang.toLowerCase());
+                    setLGToggle(false);
+                  }}
+                >
+                  <p>{lang[0].toUpperCase() + lang.slice(1).toLowerCase()}</p>
+                  <img
+                    src={Contain[lang].flag.img}
+                    alt="default language flag"
+                  />
+                </div>
+              ))}
             </article>
           )}
         </article>

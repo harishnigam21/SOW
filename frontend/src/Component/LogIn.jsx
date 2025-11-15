@@ -3,8 +3,8 @@ import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { IoIosEye } from "react-icons/io";
 import { IoIosEyeOff } from "react-icons/io";
-export default function LogIn({ switchLanguage, loginPageContain }) {
-  const [contain, setContain] = useState(loginPageContain);
+export default function LogIn({ switchLanguage, Contain }) {
+  const [contain, setContain] = useState(Contain);
   const [user, setUser] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const [passwordHidden, setPasswordHidden] = useState(true);
@@ -39,9 +39,10 @@ export default function LogIn({ switchLanguage, loginPageContain }) {
         errorRef.current.textContent = error.message;
       }
     } else if (user.password.length < 2) {
-      errorRef.current.textContent = contain[switchLanguage].password_error;
+      errorRef.current.textContent =
+        contain[switchLanguage].login.password_error;
     } else {
-      errorRef.current.textContent = contain[switchLanguage].email_error;
+      errorRef.current.textContent = contain[switchLanguage].login.email_error;
     }
     setTimeout(() => {
       errorRef.current.textContent = "";
@@ -58,14 +59,16 @@ export default function LogIn({ switchLanguage, loginPageContain }) {
   };
   return (
     <section className="login">
-      <h1>{contain[switchLanguage].heading}</h1>
+      <h1>{contain[switchLanguage].login.heading}</h1>
       <article className="loginemail">
-        <label htmlFor="email">{contain[switchLanguage].email_label}</label>
+        <label htmlFor="email">
+          {contain[switchLanguage].login.email_label}
+        </label>
         <input
           type="email"
           name="email"
           id="email"
-          placeholder={contain[switchLanguage].email_placeholder}
+          placeholder={contain[switchLanguage].login.email_placeholder}
           onChange={(e) =>
             setUser((prev) => ({ ...prev, email: e.target.value }))
           }
@@ -74,14 +77,14 @@ export default function LogIn({ switchLanguage, loginPageContain }) {
       </article>
       <article className="loginpassword">
         <label htmlFor="password">
-          {contain[switchLanguage].password_label}
+          {contain[switchLanguage].login.password_label}
         </label>
         <div className="passworddiv">
           <input
             type={passwordHidden ? "password" : "text"}
             name="password"
             id="password"
-            placeholder={contain[switchLanguage].password_placeholder}
+            placeholder={contain[switchLanguage].login.password_placeholder}
             onChange={(e) =>
               setUser((prev) => ({ ...prev, password: e.target.value }))
             }
@@ -103,12 +106,14 @@ export default function LogIn({ switchLanguage, loginPageContain }) {
       </article>
       <strong ref={errorRef} className="error"></strong>
       <button className="loginbutton flex" onClick={handleSubmit}>
-        <span>{contain[switchLanguage].btn_label}</span>
+        <span>{contain[switchLanguage].login.btn_label}</span>
         <span ref={loaderRef} className="loader"></span>
       </button>
       <article className="loginextras">
-        <Link to={"/register"}>{contain[switchLanguage].register_label}</Link>
-        <Link to={"/frgpwd"}>{contain[switchLanguage].frgpwd_label}</Link>
+        <Link to={"/register"}>
+          {contain[switchLanguage].login.register_label}
+        </Link>
+        <Link to={"/frgpwd"}>{contain[switchLanguage].login.frgpwd_label}</Link>
       </article>
     </section>
   );

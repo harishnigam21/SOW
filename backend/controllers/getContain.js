@@ -6,32 +6,20 @@ const getContain = async (req, res) => {
       console.log("Failed to get contain");
       return res.status(503).json("Failed to get contain");
     }
-    const safeParseNestedString = (jsonString) => {
-      try {
-        if (!jsonString) return null;
-        let cleanedString = jsonString.replace(/\\r\\n|\\n/g, "");
-        cleanedString = cleanedString.replace(/`/g, '"');
-        cleanedString = cleanedString.replace(/'/g, '"');
-        cleanedString = cleanedString.replace(/(\w+):/g, '"$1":');
-        cleanedString = cleanedString.replace(/,\s*([\]}])/g, "$1");
+    const result = contain.reduce((acc, row) => {
+      const { languages, page, target, value } = row;
 
-        return JSON.parse(cleanedString);
-      } catch (e) {
-        console.error("Failed to parse nested JSON:", jsonString, e);
-        return null;
-      }
-    };
-    const transformedContainData = contain.map((item) => {
-      return {
-        ...item,
-        languages: JSON.parse(item.languages.replace(/'/g, '"')),
-        loginPageContain: safeParseNestedString(item.loginPageContain),
-        terms: safeParseNestedString(item.terms),
-      };
-    });
+      if (!acc[languages]) acc[languages] = {};
+      if (!acc[languages][page]) acc[languages][page] = {};
+
+      acc[languages][page][target] = value;
+
+      return acc;
+    }, {});
+    console.log("Successfully got contain");
     return res.status(200).json({
       message: "Successfully got contain",
-      data: transformedContainData,
+      data: result,
     });
   } catch (error) {
     console.log(error);

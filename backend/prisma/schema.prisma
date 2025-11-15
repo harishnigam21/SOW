@@ -32,8 +32,9 @@ model Services {
 }
 
 model Contain {
-  id               Int    @id @unique(map: "contain_id_UNIQUE") @default(autoincrement())
-  languages        String @db.Text
-  loginPageContain String @db.Text
-  terms            String @db.Text
+  id        Int    @id @unique(map: "contain_id_UNIQUE") @default(autoincrement())
+  languages String @db.Text
+  page      String @db.Text
+  target    String @db.Text
+  value     String @db.Text
 }
