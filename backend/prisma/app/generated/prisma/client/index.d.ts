@@ -2138,42 +2138,39 @@ export namespace Prisma {
 
   export type ServiceAvgAggregateOutputType = {
     id: number | null
-    inPrice: number | null
-    price: number | null
-    inStock: number | null
   }
 
   export type ServiceSumAggregateOutputType = {
     id: number | null
-    inPrice: number | null
-    price: number | null
-    inStock: number | null
   }
 
   export type ServiceMinAggregateOutputType = {
     id: number | null
+    article_no: string | null
     email: string | null
     service: string | null
-    inPrice: number | null
-    price: number | null
+    inPrice: string | null
+    price: string | null
     unit: string | null
-    inStock: number | null
+    inStock: string | null
     description: string | null
   }
 
   export type ServiceMaxAggregateOutputType = {
     id: number | null
+    article_no: string | null
     email: string | null
     service: string | null
-    inPrice: number | null
-    price: number | null
+    inPrice: string | null
+    price: string | null
     unit: string | null
-    inStock: number | null
+    inStock: string | null
     description: string | null
   }
 
   export type ServiceCountAggregateOutputType = {
     id: number
+    article_no: number
     email: number
     service: number
     inPrice: number
@@ -2187,20 +2184,15 @@ export namespace Prisma {
 
   export type ServiceAvgAggregateInputType = {
     id?: true
-    inPrice?: true
-    price?: true
-    inStock?: true
   }
 
   export type ServiceSumAggregateInputType = {
     id?: true
-    inPrice?: true
-    price?: true
-    inStock?: true
   }
 
   export type ServiceMinAggregateInputType = {
     id?: true
+    article_no?: true
     email?: true
     service?: true
     inPrice?: true
@@ -2212,6 +2204,7 @@ export namespace Prisma {
 
   export type ServiceMaxAggregateInputType = {
     id?: true
+    article_no?: true
     email?: true
     service?: true
     inPrice?: true
@@ -2223,6 +2216,7 @@ export namespace Prisma {
 
   export type ServiceCountAggregateInputType = {
     id?: true
+    article_no?: true
     email?: true
     service?: true
     inPrice?: true
@@ -2321,12 +2315,13 @@ export namespace Prisma {
 
   export type ServiceGroupByOutputType = {
     id: number
+    article_no: string
     email: string
     service: string
-    inPrice: number
-    price: number
+    inPrice: string
+    price: string
     unit: string
-    inStock: number
+    inStock: string
     description: string
     _count: ServiceCountAggregateOutputType | null
     _avg: ServiceAvgAggregateOutputType | null
@@ -2351,6 +2346,7 @@ export namespace Prisma {
 
   export type ServiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    article_no?: boolean
     email?: boolean
     service?: boolean
     inPrice?: boolean
@@ -2362,6 +2358,7 @@ export namespace Prisma {
 
   export type ServiceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    article_no?: boolean
     email?: boolean
     service?: boolean
     inPrice?: boolean
@@ -2373,6 +2370,7 @@ export namespace Prisma {
 
   export type ServiceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    article_no?: boolean
     email?: boolean
     service?: boolean
     inPrice?: boolean
@@ -2384,6 +2382,7 @@ export namespace Prisma {
 
   export type ServiceSelectScalar = {
     id?: boolean
+    article_no?: boolean
     email?: boolean
     service?: boolean
     inPrice?: boolean
@@ -2393,19 +2392,20 @@ export namespace Prisma {
     description?: boolean
   }
 
-  export type ServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "service" | "inPrice" | "price" | "unit" | "inStock" | "description", ExtArgs["result"]["service"]>
+  export type ServiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "article_no" | "email" | "service" | "inPrice" | "price" | "unit" | "inStock" | "description", ExtArgs["result"]["service"]>
 
   export type $ServicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Service"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      article_no: string
       email: string
       service: string
-      inPrice: number
-      price: number
+      inPrice: string
+      price: string
       unit: string
-      inStock: number
+      inStock: string
       description: string
     }, ExtArgs["result"]["service"]>
     composites: {}
@@ -2831,12 +2831,13 @@ export namespace Prisma {
    */
   interface ServiceFieldRefs {
     readonly id: FieldRef<"Service", 'Int'>
+    readonly article_no: FieldRef<"Service", 'String'>
     readonly email: FieldRef<"Service", 'String'>
     readonly service: FieldRef<"Service", 'String'>
-    readonly inPrice: FieldRef<"Service", 'Int'>
-    readonly price: FieldRef<"Service", 'Int'>
+    readonly inPrice: FieldRef<"Service", 'String'>
+    readonly price: FieldRef<"Service", 'String'>
     readonly unit: FieldRef<"Service", 'String'>
-    readonly inStock: FieldRef<"Service", 'Int'>
+    readonly inStock: FieldRef<"Service", 'String'>
     readonly description: FieldRef<"Service", 'String'>
   }
     
@@ -4264,6 +4265,7 @@ export namespace Prisma {
 
   export const ServiceScalarFieldEnum: {
     id: 'id',
+    article_no: 'article_no',
     email: 'email',
     service: 'service',
     inPrice: 'inPrice',
@@ -4440,17 +4442,19 @@ export namespace Prisma {
     OR?: ServiceWhereInput[]
     NOT?: ServiceWhereInput | ServiceWhereInput[]
     id?: IntFilter<"Service"> | number
+    article_no?: StringFilter<"Service"> | string
     email?: StringFilter<"Service"> | string
     service?: StringFilter<"Service"> | string
-    inPrice?: IntFilter<"Service"> | number
-    price?: IntFilter<"Service"> | number
+    inPrice?: StringFilter<"Service"> | string
+    price?: StringFilter<"Service"> | string
     unit?: StringFilter<"Service"> | string
-    inStock?: IntFilter<"Service"> | number
+    inStock?: StringFilter<"Service"> | string
     description?: StringFilter<"Service"> | string
   }
 
   export type ServiceOrderByWithRelationInput = {
     id?: SortOrder
+    article_no?: SortOrder
     email?: SortOrder
     service?: SortOrder
     inPrice?: SortOrder
@@ -4465,17 +4469,19 @@ export namespace Prisma {
     AND?: ServiceWhereInput | ServiceWhereInput[]
     OR?: ServiceWhereInput[]
     NOT?: ServiceWhereInput | ServiceWhereInput[]
+    article_no?: StringFilter<"Service"> | string
     email?: StringFilter<"Service"> | string
     service?: StringFilter<"Service"> | string
-    inPrice?: IntFilter<"Service"> | number
-    price?: IntFilter<"Service"> | number
+    inPrice?: StringFilter<"Service"> | string
+    price?: StringFilter<"Service"> | string
     unit?: StringFilter<"Service"> | string
-    inStock?: IntFilter<"Service"> | number
+    inStock?: StringFilter<"Service"> | string
     description?: StringFilter<"Service"> | string
   }, "id" | "id">
 
   export type ServiceOrderByWithAggregationInput = {
     id?: SortOrder
+    article_no?: SortOrder
     email?: SortOrder
     service?: SortOrder
     inPrice?: SortOrder
@@ -4495,12 +4501,13 @@ export namespace Prisma {
     OR?: ServiceScalarWhereWithAggregatesInput[]
     NOT?: ServiceScalarWhereWithAggregatesInput | ServiceScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Service"> | number
+    article_no?: StringWithAggregatesFilter<"Service"> | string
     email?: StringWithAggregatesFilter<"Service"> | string
     service?: StringWithAggregatesFilter<"Service"> | string
-    inPrice?: IntWithAggregatesFilter<"Service"> | number
-    price?: IntWithAggregatesFilter<"Service"> | number
+    inPrice?: StringWithAggregatesFilter<"Service"> | string
+    price?: StringWithAggregatesFilter<"Service"> | string
     unit?: StringWithAggregatesFilter<"Service"> | string
-    inStock?: IntWithAggregatesFilter<"Service"> | number
+    inStock?: StringWithAggregatesFilter<"Service"> | string
     description?: StringWithAggregatesFilter<"Service"> | string
   }
 
@@ -4640,76 +4647,83 @@ export namespace Prisma {
   }
 
   export type ServiceCreateInput = {
+    article_no: string
     email: string
     service: string
-    inPrice: number
-    price: number
+    inPrice: string
+    price: string
     unit: string
-    inStock: number
+    inStock: string
     description: string
   }
 
   export type ServiceUncheckedCreateInput = {
     id?: number
+    article_no: string
     email: string
     service: string
-    inPrice: number
-    price: number
+    inPrice: string
+    price: string
     unit: string
-    inStock: number
+    inStock: string
     description: string
   }
 
   export type ServiceUpdateInput = {
+    article_no?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
-    inPrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
+    inPrice?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
-    inStock?: IntFieldUpdateOperationsInput | number
+    inStock?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServiceUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    article_no?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
-    inPrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
+    inPrice?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
-    inStock?: IntFieldUpdateOperationsInput | number
+    inStock?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServiceCreateManyInput = {
     id?: number
+    article_no: string
     email: string
     service: string
-    inPrice: number
-    price: number
+    inPrice: string
+    price: string
     unit: string
-    inStock: number
+    inStock: string
     description: string
   }
 
   export type ServiceUpdateManyMutationInput = {
+    article_no?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
-    inPrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
+    inPrice?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
-    inStock?: IntFieldUpdateOperationsInput | number
+    inStock?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
   export type ServiceUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    article_no?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     service?: StringFieldUpdateOperationsInput | string
-    inPrice?: IntFieldUpdateOperationsInput | number
-    price?: IntFieldUpdateOperationsInput | number
+    inPrice?: StringFieldUpdateOperationsInput | string
+    price?: StringFieldUpdateOperationsInput | string
     unit?: StringFieldUpdateOperationsInput | string
-    inStock?: IntFieldUpdateOperationsInput | number
+    inStock?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4910,6 +4924,7 @@ export namespace Prisma {
 
   export type ServiceCountOrderByAggregateInput = {
     id?: SortOrder
+    article_no?: SortOrder
     email?: SortOrder
     service?: SortOrder
     inPrice?: SortOrder
@@ -4921,13 +4936,11 @@ export namespace Prisma {
 
   export type ServiceAvgOrderByAggregateInput = {
     id?: SortOrder
-    inPrice?: SortOrder
-    price?: SortOrder
-    inStock?: SortOrder
   }
 
   export type ServiceMaxOrderByAggregateInput = {
     id?: SortOrder
+    article_no?: SortOrder
     email?: SortOrder
     service?: SortOrder
     inPrice?: SortOrder
@@ -4939,6 +4952,7 @@ export namespace Prisma {
 
   export type ServiceMinOrderByAggregateInput = {
     id?: SortOrder
+    article_no?: SortOrder
     email?: SortOrder
     service?: SortOrder
     inPrice?: SortOrder
@@ -4950,9 +4964,6 @@ export namespace Prisma {
 
   export type ServiceSumOrderByAggregateInput = {
     id?: SortOrder
-    inPrice?: SortOrder
-    price?: SortOrder
-    inStock?: SortOrder
   }
 
   export type ContainCountOrderByAggregateInput = {

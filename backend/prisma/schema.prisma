@@ -23,19 +23,20 @@ model Users {
 
 model Service {
   id          Int    @id @unique(map: "service_id_UNIQUE") @default(autoincrement())
+  article_no  String @db.VarChar(64)
   email       String @db.VarChar(128)
   service     String @db.VarChar(256)
-  inPrice     Int
-  price       Int
+  inPrice     String @db.VarChar(64)
+  price       String @db.VarChar(64)
   unit        String @db.VarChar(128)
-  inStock     Int
+  inStock     String @db.VarChar(64)
   description String @db.VarChar(512)
 }
 
 model Contain {
   id        Int    @id @unique(map: "contain_id_UNIQUE") @default(autoincrement())
-  languages String @db.Text
-  page      String @db.Text
-  target    String @db.Text
-  value     String @db.Text
+  languages String
+  page      String
+  target    String
+  value     String
 }

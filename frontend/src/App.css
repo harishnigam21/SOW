@@ -311,7 +311,7 @@ a {
   overflow-y: scroll;
 }
 .PriceListUp {
-  padding: 1rem;
+  padding: 2rem 1rem 1rem 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -347,7 +347,7 @@ a {
 .btnset {
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1rem;
 }
 .btnset1,
@@ -358,9 +358,11 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem 3rem;
+  padding: 0.5rem 1rem;
   border-radius: 2rem;
   white-space: nowrap;
+  flex-grow: 1;
+  max-width: 150px;
   gap: 1rem;
   span {
     display: none;
@@ -507,8 +509,13 @@ a {
   .btnset {
     align-items: start;
     justify-content: flex-end;
-    gap: 4rem;
+    gap: 1rem;
   }
+  .btnset1,
+.btnset2,
+.btnset3{
+  max-width: 125px;
+}
   .terms {
     article {
       max-width: 850px;
@@ -522,13 +529,15 @@ a {
   .btnset {
     gap: unset;
     padding: unset;
-    gap: 1rem;
+    gap: 1.5rem;
+    justify-content: end;
   }
   .btnset1,
   .btnset2,
   .btnset3 {
     padding: unset;
     padding: 0.5rem;
+    max-width: fit-content;
     span {
       display: flex;
     }

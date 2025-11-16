@@ -369,7 +369,32 @@ export default function PriceList({ screen }) {
             <tbody className="pageDataBody">
               {priceList.map((item, index) => (
                 <tr key={`product/${index}`}>
-                  <td>{index + 1}</td>
+                  <td>
+                    {" "}
+                    <input
+                      type="number"
+                      name={`article_no/${index}`}
+                      id={`article_no/${index}`}
+                      value={item.article_no}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "article_no", e.target.value)
+                      }
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              return {
+                                ...inthere,
+                                article_no: e.target.value,
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
                   <td>
                     <input
                       type="text"
@@ -399,11 +424,7 @@ export default function PriceList({ screen }) {
                       id={`inprice/${index}`}
                       value={item.inPrice}
                       onBlur={(e) =>
-                        handleOnBlur(
-                          item.id,
-                          "inPrice",
-                          parseInt(e.target.value)
-                        )
+                        handleOnBlur(item.id, "inPrice", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -411,7 +432,7 @@ export default function PriceList({ screen }) {
                             if (item.id == inthere.id) {
                               return {
                                 ...inthere,
-                                inPrice: parseInt(e.target.value),
+                                inPrice: e.target.value,
                               };
                             } else {
                               return inthere;
@@ -428,7 +449,7 @@ export default function PriceList({ screen }) {
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", parseInt(e.target.value))
+                        handleOnBlur(item.id, "price", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -436,7 +457,7 @@ export default function PriceList({ screen }) {
                             if (item.id == inthere.id) {
                               return {
                                 ...inthere,
-                                price: parseInt(e.target.value),
+                                price: e.target.value,
                               };
                             } else {
                               return inthere;
@@ -475,11 +496,7 @@ export default function PriceList({ screen }) {
                       id={`instock/${index}`}
                       value={item.inStock}
                       onBlur={(e) =>
-                        handleOnBlur(
-                          item.id,
-                          "inStock",
-                          parseInt(e.target.value)
-                        )
+                        handleOnBlur(item.id, "inStock", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -487,7 +504,7 @@ export default function PriceList({ screen }) {
                             if (item.id == inthere.id) {
                               return {
                                 ...inthere,
-                                inStock: parseInt(e.target.value),
+                                inStock: e.target.value,
                               };
                             } else {
                               return inthere;
@@ -544,7 +561,31 @@ export default function PriceList({ screen }) {
             <tbody className="pageDataBody">
               {priceList.map((item, index) => (
                 <tr key={`product/${index}`}>
-                  <td>{index + 1}</td>
+                  <td>
+                    <input
+                      type="number"
+                      name={`article_no/${index}`}
+                      id={`article_no/${index}`}
+                      value={item.article_no}
+                      onBlur={(e) =>
+                        handleOnBlur(item.id, "article_no", e.target.value)
+                      }
+                      onChange={(e) =>
+                        setPriceList((prev) =>
+                          prev.map((inthere) => {
+                            if (item.id == inthere.id) {
+                              return {
+                                ...inthere,
+                                article_no: e.target.value,
+                              };
+                            } else {
+                              return inthere;
+                            }
+                          })
+                        )
+                      }
+                    />
+                  </td>
                   <td>
                     <input
                       type="text"
@@ -574,7 +615,7 @@ export default function PriceList({ screen }) {
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", parseInt(e.target.value))
+                        handleOnBlur(item.id, "price", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -582,7 +623,7 @@ export default function PriceList({ screen }) {
                             if (item.id == inthere.id) {
                               return {
                                 ...inthere,
-                                price: parseInt(e.target.value),
+                                price: e.target.value,
                               };
                             } else {
                               return inthere;
@@ -599,11 +640,7 @@ export default function PriceList({ screen }) {
                       id={`instock/${index}`}
                       value={item.inStock}
                       onBlur={(e) =>
-                        handleOnBlur(
-                          item.id,
-                          "inStock",
-                          parseInt(e.target.value)
-                        )
+                        handleOnBlur(item.id, "inStock", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -611,7 +648,7 @@ export default function PriceList({ screen }) {
                             if (item.id == inthere.id) {
                               return {
                                 ...inthere,
-                                inStock: parseInt(e.target.value),
+                                inStock: e.target.value,
                               };
                             } else {
                               return inthere;
@@ -691,7 +728,7 @@ export default function PriceList({ screen }) {
                       id={`price/${index}`}
                       value={item.price}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", parseInt(e.target.value))
+                        handleOnBlur(item.id, "price", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -699,7 +736,7 @@ export default function PriceList({ screen }) {
                             if (item.id == inthere.id) {
                               return {
                                 ...inthere,
-                                price: parseInt(e.target.value),
+                                price: e.target.value,
                               };
                             } else {
                               return inthere;
