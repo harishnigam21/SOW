@@ -1,4 +1,7 @@
 import { FaBars } from "react-icons/fa";
+import userpro from "../assets/images/userpro.png";
+import { GoDotFill } from "react-icons/go";
+
 export default function InHeader({
   screen,
   user,
@@ -15,15 +18,15 @@ export default function InHeader({
           onAnimationStart={() => setInHeaderBar(true)}
         >
           <div className="proimg">
-            <span>{user.first_name[0]}</span>
-            <span>{user.last_name[0]}</span>
+            <img src={userpro} alt="userpro" />
+            <GoDotFill style={{position:'absolute',right:'4px',bottom:'15px',color:'greenyellow'}}/>
           </div>
           <div className="userinfo">
             <strong>
               <span>{user.first_name} </span>
               <span>{user.last_name}</span>
             </strong>
-            <p>{user.email}</p>
+            <p>MERN Developer</p>
           </div>
         </article>
       )}

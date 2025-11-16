@@ -4,6 +4,8 @@ import { IoMdAddCircle } from "react-icons/io";
 import { IoPrintSharp } from "react-icons/io5";
 import { IoToggle } from "react-icons/io5";
 import { BsThreeDots } from "react-icons/bs";
+import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowDownLong } from "react-icons/fa6";
 
 export default function PriceList({ screen }) {
   // const data = [
@@ -229,7 +231,9 @@ export default function PriceList({ screen }) {
     };
     getData();
   }, []);
-  const handleOnBlur = async (id, key, value) => {
+  const handleOnBlur = async (e, id, key, value) => {
+    e.target.parentElement.parentElement.childNodes[0].childNodes[0].style.display =
+      "none";
     const updateDataUrl = `${import.meta.env.VITE_BACKEND_HOST}/updateData`;
     const record = { id: id, [key]: value };
     try {
@@ -310,6 +314,10 @@ export default function PriceList({ screen }) {
   //   updateData();
   // };
 
+  const showArrow = (e) => {
+    e.target.parentElement.parentElement.childNodes[0].childNodes[0].style.display =
+      "flex";
+  };
   return (
     <section className="PriceList">
       <article className="PriceListUp">
@@ -336,7 +344,7 @@ export default function PriceList({ screen }) {
         <article className="btnset">
           <div className="btnset1">
             <span>New Product</span>{" "}
-            <IoMdAddCircle style={{ color: "green" }} className="icon" />
+            <IoMdAddCircle style={{ color: "#05d221" }} className="icon" />
           </div>
           <div className="btnset2">
             <span>Print List</span>{" "}
@@ -356,8 +364,17 @@ export default function PriceList({ screen }) {
           <table className="pageData">
             <thead>
               <tr className="pageDataHead">
-                <td>Article No.</td>
-                <td>Product/service</td>
+                <td></td>
+                <td>
+                  Article No.{" "}
+                  <FaArrowDownLong
+                    style={{ color: "rgba(0, 183, 255, 0.62)" }}
+                  />
+                </td>
+                <td>
+                  Product/service{" "}
+                  <FaArrowDownLong style={{ color: "#05d221" }} />
+                </td>
                 <td>In Price</td>
                 <td>Price</td>
                 <td>Unit</td>
@@ -370,14 +387,22 @@ export default function PriceList({ screen }) {
               {priceList.map((item, index) => (
                 <tr key={`product/${index}`}>
                   <td>
+                    <FaArrowRightLong
+                      style={{ color: "rgb(0, 183, 255)", display: "none" }}
+                    />
+                  </td>
+                  <td>
                     {" "}
                     <input
                       type="number"
                       name={`article_no/${index}`}
                       id={`article_no/${index}`}
                       value={item.article_no}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "article_no", e.target.value)
+                        handleOnBlur(e, item.id, "article_no", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -401,8 +426,11 @@ export default function PriceList({ screen }) {
                       name={`service/${index}`}
                       id={`service/${index}`}
                       value={item.service}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "service", e.target.value)
+                        handleOnBlur(e, item.id, "service", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -423,8 +451,11 @@ export default function PriceList({ screen }) {
                       name={`inprice/${index}`}
                       id={`inprice/${index}`}
                       value={item.inPrice}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "inPrice", e.target.value)
+                        handleOnBlur(e, item.id, "inPrice", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -448,8 +479,11 @@ export default function PriceList({ screen }) {
                       name={`price/${index}`}
                       id={`price/${index}`}
                       value={item.price}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", e.target.value)
+                        handleOnBlur(e, item.id, "price", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -473,8 +507,11 @@ export default function PriceList({ screen }) {
                       name={`unit/${index}`}
                       id={`unit/${index}`}
                       value={item.unit}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "unit", e.target.value)
+                        handleOnBlur(e, item.id, "unit", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -495,8 +532,11 @@ export default function PriceList({ screen }) {
                       name={`instock/${index}`}
                       id={`instock/${index}`}
                       value={item.inStock}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "inStock", e.target.value)
+                        handleOnBlur(e, item.id, "inStock", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -520,8 +560,11 @@ export default function PriceList({ screen }) {
                       name={`description/${index}`}
                       id={`description/${index}`}
                       value={item.description}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "description", e.target.value)
+                        handleOnBlur(e, item.id, "description", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -550,8 +593,17 @@ export default function PriceList({ screen }) {
           <table className="pageData">
             <thead>
               <tr className="pageDataHead">
-                <td>Article No.</td>
-                <td>Product/service</td>
+                <td></td>
+                <td>
+                  Article No.{" "}
+                  <FaArrowDownLong
+                    style={{ color: "rgba(0, 183, 255, 0.62)" }}
+                  />
+                </td>
+                <td>
+                  Product/service{" "}
+                  <FaArrowDownLong style={{ color: "#05d221" }} />
+                </td>
                 <td>Price</td>
                 <td>In Stock</td>
                 <td>Unit</td>
@@ -562,13 +614,21 @@ export default function PriceList({ screen }) {
               {priceList.map((item, index) => (
                 <tr key={`product/${index}`}>
                   <td>
+                    <FaArrowRightLong
+                      style={{ color: "rgb(0, 183, 255)", display: "none" }}
+                    />
+                  </td>
+                  <td>
                     <input
                       type="number"
                       name={`article_no/${index}`}
                       id={`article_no/${index}`}
                       value={item.article_no}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "article_no", e.target.value)
+                        handleOnBlur(e, item.id, "article_no", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -592,8 +652,11 @@ export default function PriceList({ screen }) {
                       name={`service/${index}`}
                       id={`service/${index}`}
                       value={item.service}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "service", e.target.value)
+                        handleOnBlur(e, item.id, "service", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -614,8 +677,11 @@ export default function PriceList({ screen }) {
                       name={`price/${index}`}
                       id={`price/${index}`}
                       value={item.price}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", e.target.value)
+                        handleOnBlur(e, item.id, "price", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -639,8 +705,11 @@ export default function PriceList({ screen }) {
                       name={`instock/${index}`}
                       id={`instock/${index}`}
                       value={item.inStock}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "inStock", e.target.value)
+                        handleOnBlur(e, item.id, "inStock", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -664,8 +733,11 @@ export default function PriceList({ screen }) {
                       name={`unit/${index}`}
                       id={`unit/${index}`}
                       value={item.unit}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "unit", e.target.value)
+                        handleOnBlur(e, item.id, "unit", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -691,7 +763,11 @@ export default function PriceList({ screen }) {
           <table className="pageData">
             <thead>
               <tr className="pageDataHead">
-                <td>Product/service</td>
+                <td></td>
+                <td>
+                  Product/service{" "}
+                  <FaArrowDownLong style={{ color: "#05d221" }} />
+                </td>
                 <td>Price</td>
                 <td></td>
               </tr>
@@ -700,13 +776,21 @@ export default function PriceList({ screen }) {
               {priceList.map((item, index) => (
                 <tr key={`product/${index}`}>
                   <td>
+                    <FaArrowRightLong
+                      style={{ color: "rgb(0, 183, 255)", display: "none" }}
+                    />
+                  </td>
+                  <td>
                     <input
                       type="text"
                       name={`service/${index}`}
                       id={`service/${index}`}
                       value={item.service}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "service", e.target.value)
+                        handleOnBlur(e, item.id, "service", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>
@@ -727,8 +811,11 @@ export default function PriceList({ screen }) {
                       name={`price/${index}`}
                       id={`price/${index}`}
                       value={item.price}
+                      onFocus={(e) => {
+                        showArrow(e);
+                      }}
                       onBlur={(e) =>
-                        handleOnBlur(item.id, "price", e.target.value)
+                        handleOnBlur(e, item.id, "price", e.target.value)
                       }
                       onChange={(e) =>
                         setPriceList((prev) =>

@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { menulist } from "./assets/menulist";
 import { Outlet } from "react-router-dom";
 import InHeader from "./common component/InHeader";
+import { GoDotFill } from "react-icons/go";
+
 export default function Home({ screen }) {
   const [inHeaderBar, setInHeaderBar] = useState(true);
   const navigate = useNavigate();
@@ -55,27 +57,45 @@ export default function Home({ screen }) {
       />
       <section className="inHome">
         {inHeaderBar && (
-          <article className="inHomeLeft">
+          <article className="inHomeLeft noscrollbar">
             <strong>Menu</strong>
-            {menulist.map((list, index) => (
-              <Link
-                className="menuListItem"
-                to={list.path}
-                key={`menulist/${index}`}
-              >
-                <list.icon className="icon" />
-                <strong
-                  style={{
-                    color:
-                      list.path == window.location.pathname.split("/").slice(-1)
-                        ? "blue"
-                        : "black",
-                  }}
+            <article className="menuList">
+              {menulist.map((list, index) => (
+                <Link
+                  className="menuListItem onnav"
+                  to={list.path}
+                  key={`menulist/${index}`}
                 >
-                  {list.name}
-                </strong>
-              </Link>
-            ))}
+                  <GoDotFill
+                    style={{
+                      fontSize: "30px",
+                      color: "#05d221",
+                      position: "absolute",
+                      left: 0,
+                      display:
+                        list.path ==
+                        window.location.pathname.split("/").slice(-1)
+                          ? "flex"
+                          : "none",
+                    }}
+                  />
+                  <div className="icondiv" style={{display:'flex',alignItems:'center'}}>
+                    <list.icon style={{ color: list.color }} className="icon" />
+                  </div>
+                  <strong
+                    style={{
+                      color:
+                        list.path ==
+                        window.location.pathname.split("/").slice(-1)
+                          ? "green"
+                          : "black",
+                    }}
+                  >
+                    {list.name}
+                  </strong>
+                </Link>
+              ))}
+            </article>
           </article>
         )}
         <article className="inHomeRight">

@@ -269,21 +269,30 @@ a {
   background-color: white;
 }
 .inHomeLeft {
-  width: fit-content;
+  min-width: fit-content;
   white-space: nowrap;
-  height: 100%;
+  position: relative;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  padding: 1rem;
+  padding: 1rem 1rem 1rem 1.8rem;
   z-index: 50;
+  overflow-y: auto;
+  .menuList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  /* overflow-y: auto; */
   a {
     font-weight: lighter;
   }
   > strong {
-    font-size: 28px;
+    font-size: 24px;
+    font-weight: normal;
     text-align: center;
-    border-bottom: 1px solid blue;
+    border-bottom: 2px solid rgb(0, 183, 255);
   }
   box-shadow: 0px 0px 1px black;
 }
@@ -304,7 +313,6 @@ a {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   align-items: center;
   width: 100%;
   height: 100%;
@@ -381,17 +389,21 @@ a {
 }
 .pageDataHead {
   white-space: nowrap;
+  td{
+    padding-left: 0.5rem;
+  }
   td,
   input {
-    font-weight: bold;
+    font-weight:500;
     font-size: large;
   }
 }
 .pageDataBody {
+  
   tr td input {
     width: 100%;
     border: none;
-    border-radius: 1rem;
+    border-radius: 0.6rem;
     border: 1px solid rgb(234, 224, 224);
     padding: 0.5rem 1rem;
   }
@@ -423,8 +435,8 @@ a {
   }
 }
 .Inheader {
-  padding: 1rem 3rem;
-  color: white;
+  padding: 0.2rem 3rem;
+  color: rgb(255, 255, 255);
   background-color: rgb(0, 183, 255);
   display: flex;
   justify-content: space-between;
@@ -442,14 +454,19 @@ a {
   }
 }
 .proimg {
-  border: 2px solid white;
+  position: relative;
   padding: 0.5rem;
-  border-radius: 100%;
   aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  img {
+    width: 50px;
+    height: 50px;
+  }
 }
 .userdetail {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.2rem;
   align-items: center;
   animation: fadeOut 1s ease;
 }
@@ -512,10 +529,10 @@ a {
     gap: 1rem;
   }
   .btnset1,
-.btnset2,
-.btnset3{
-  max-width: 125px;
-}
+  .btnset2,
+  .btnset3 {
+    max-width: 125px;
+  }
   .terms {
     article {
       max-width: 850px;
@@ -536,10 +553,11 @@ a {
   .btnset2,
   .btnset3 {
     padding: unset;
-    padding: 0.5rem;
+    padding: 0.3rem;
     max-width: fit-content;
     span {
       display: flex;
+      padding: 0 0.5rem;
     }
   }
 }
